@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
 import Header from './HeaderComponent';
-import SideBar from './SideBarComponent';
-
+/* Customized from: https://github.com/gauravchl/react-simple-sidenav */
 class Main extends Component {
 
     render(){
         return(
             <div>
-                <Header />
-                <SideBar/>
+                <Header /> 
             </div>
         );
     }
