@@ -5,7 +5,8 @@ class Header extends Component {
     constructor(props){
         super(props);
         this.state = {
-            showNav : false
+            showNav : false,
+            item: 'Home'
         };
     }
 
@@ -59,6 +60,7 @@ class Header extends Component {
             titleStyle={styles.bg2}
             items={[{title: 'Home', icon:'fa fa-home fa-lg'}, {title: 'Service', icon:'fa fa-info-circle fa-lg'}, {title:'About', icon:'fa fa-info-circle fa-lg'}, {title:'Contact', icon:'fa fa-info-circle fa-lg'}]}
             itemStyle={{backgroundColor: '#fff'}}
+            onItemClick={(item) => console.log(item)}
             itemHoverStyle={{backgroundColor: '#b2dfdb'}} />
         </>        
       );

@@ -12,6 +12,7 @@ class SideNav extends React.Component {
     this.getDefaultContent = this.getDefaultContent.bind(this);
     this.update = this.update.bind(this);
     this.getStyle = this.getStyle.bind(this);
+    this.onItemClick = this.onItemClick.bind(this);
   }
 
   hideNav() {
@@ -51,7 +52,10 @@ class SideNav extends React.Component {
     this._nav.current.style.transform = `translateX(${translateX}px)`;
   }
 
-
+  onItemClick(title) {
+    this.props.onItemClick(title)
+    this.hideNav()
+  }
 
   getDefaultContent() {
     let styles = {
@@ -103,10 +107,13 @@ class SideNav extends React.Component {
           <img style={styles.logo} src="/assets/images/family.jpg" alt="family" width="90px" class="rounded-circle"/>
           <h3 className="mt-3">{this.props.title || 'Simple SideNav'}</h3>
         </div>
-    
         <ul style={styles.listUnstyled}>
           { 
-            this.props.items ? this.props.items.map((item, key) => <li key={'item' + key} style={styles.li} onMouseOver={(e)=> handleItemHover(e, true)} onMouseOut={(e)=>handleItemHover(e, false)}>
+            this.props.items ? this.props.items.map((item, key) => <li key={'item' + key} 
+              style={styles.li} 
+              onMouseOver={(e)=> handleItemHover(e, true)} 
+              onClick={() => this.onItemClick(item.title)}
+              onMouseOut={(e)=> handleItemHover(e, false)} >
                 <i style={styles.icon} className={item.icon}></i>{item.title}
             </li>)
             : <li key='item1' style={styles.li}>Item 1</li>
@@ -199,6 +206,7 @@ SideNav.propTypes = {
   openFromRight:  PropTypes.bool,
   onHideNav:      PropTypes.func,
   onShowNav:      PropTypes.func,
+  // onItemClick:    PropTypes.func,
 }
 
 
