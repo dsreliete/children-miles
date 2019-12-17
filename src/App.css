@@ -2,6 +2,15 @@ body {
   font-family: "Open Sans", sans-serif;
 }
 
+.card > .fa {
+  color: white;
+}
+
+.card-button {
+  background-color: #009688;
+}
+
+
 
 
 
