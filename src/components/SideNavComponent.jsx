@@ -104,7 +104,7 @@ class SideNav extends React.Component {
     return (
       <div>
         <div style={styles.title}>
-          <img style={styles.logo} src="/assets/images/family.jpg" alt="family" width="90px" class="rounded-circle"/>
+          <img style={styles.logo} src="/assets/images/family.jpg" alt="family" width="90px" className="rounded-circle"/>
           <h3 className="mt-3">{this.props.title || 'Simple SideNav'}</h3>
         </div>
         <ul style={styles.listUnstyled}>
