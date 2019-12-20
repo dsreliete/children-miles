@@ -10,7 +10,19 @@ body {
   background-color: #009688;
 }
 
+.container-wrapper {
+  margin-left: 90px;
+  margin-right: 90px;
+  margin-top: 90px;
+  margin-bottom: 0px;
+}
 
+.container-buttons {
+  margin-left: 90px;
+  margin-right: 90px;
+  margin-top: 48px;
+  margin-bottom: 64px;
+}
 
 
 
