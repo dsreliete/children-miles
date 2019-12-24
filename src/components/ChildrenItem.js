@@ -10,7 +10,7 @@ export default function ChildrenItem({child}) {
                         <img className="img" src={imageSrc} alt="child" />
                         <div className="media-body ml-4 align-self-center">
                             <h4>{child.name}</h4>
-                            <h6>{child.dtNasc}</h6>
+                            <h4>{child.birthDate.toISOString()}</h4>
                         </div>
                     </div>
                 </div>
