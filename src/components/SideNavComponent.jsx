@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+/* Customized from: https://github.com/gauravchl/react-simple-sidenav */
 
 class SideNav extends React.Component {
   constructor(props) {

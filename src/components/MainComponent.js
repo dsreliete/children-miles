@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Header from './HeaderComponent';
 import CardBtnControlComponent from './CardButtonControlComponent';
 import ChildrenList from './ChildrenListComponent';
-/* Customized from: https://github.com/gauravchl/react-simple-sidenav */
+
 class Main extends Component {
     state = {
         childrenList: []
@@ -12,6 +12,7 @@ class Main extends Component {
         this.setState({
             childrenList: [...this.state.childrenList, child]
         });
+        console.log(this.state.childrenList)
     }
 
     handleDeleteChildrenFromList = index => {
