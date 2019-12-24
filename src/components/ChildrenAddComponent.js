@@ -8,9 +8,11 @@ export default class ChildrenAddComponent extends Component {
 
     constructor(props) {
         super(props)
-
+        
+        this.id = 0
+        
         this.initialState = {
-            id: 0,
+            id: this.id,
             name: '',
             gender: '',
             birthDate: new Date(),
@@ -25,7 +27,7 @@ export default class ChildrenAddComponent extends Component {
         this.handleInputChange = this.handleInputChange.bind(this);
     }
 
-    render(){
+    render() {
         const errors = this.checkData(this.state.name, this.state.birthDate, this.state.gender);
         const title = "Add Child";
         return (
@@ -109,11 +111,16 @@ export default class ChildrenAddComponent extends Component {
         });
     }
 
+    handleIdChild = () => {
+        this.id++;
+    }
+
     handleSubmit = (event) => {
         event.preventDefault();
         if(this.validateValues()) {
-            alert('Current state is: ' + JSON.stringify(this.state));
+            this.handleIdChild()
             const newChild = {
+                id: this.id,
                 name: this.state.name,
                 birthDate: this.state.birthDate,
                 gender: this.state.gender
