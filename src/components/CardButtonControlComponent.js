@@ -45,7 +45,7 @@ export default class CardButtonControlComponent extends Component {
     getComponentToRender(){
         const componentName = this.state.renderComponent;
 
-        switch(componentName){
+        switch(componentName) {
             case ADD_COMPONENT:
                 return <ChildrenAddComponent />
             case EDIT_COMPONENT:
@@ -60,7 +60,6 @@ export default class CardButtonControlComponent extends Component {
     render() {
         
         let component = this.getComponentToRender();
-
         return(
             <div>
                 {this.state.hasComponentToRender ?  
