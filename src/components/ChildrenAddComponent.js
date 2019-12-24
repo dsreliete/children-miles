@@ -2,12 +2,14 @@ import React, {Component} from 'react';
 import { Button, Form, FormGroup, Label, Input, Col, FormFeedback } from 'reactstrap';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import TitleComponent from './TitleComponent';
+
 export default class ChildrenAddComponent extends Component {
 
     constructor(props) {
         super(props)
 
-        this.state = {
+        this.initialState = {
             id: 0,
             name: '',
             gender: '',
@@ -19,18 +21,17 @@ export default class ChildrenAddComponent extends Component {
             }, 
             validated: false,
         }
+        this.state = this.initialState;
         this.handleInputChange = this.handleInputChange.bind(this);
     }
 
     render(){
         const errors = this.checkData(this.state.name, this.state.birthDate, this.state.gender);
+        const title = "Add Child";
         return (
             <div className="container-wrapper">
                 <div className="row">
-                    <div className="col-sm-12 mb-5">
-                        <h1><i className="fa fa-user fa-1x mr-3"></i>Add Child</h1>
-                        <hr/>
-                    </div>
+                    <TitleComponent title={title}/>
                 </div>       
                 <div className="row justify-content-center">
                     <div className="col-md-10">
@@ -106,15 +107,20 @@ export default class ChildrenAddComponent extends Component {
         this.setState({
             [name]: value
         });
-        console.log(name) 
-        console.log(value)
     }
 
     handleSubmit = (event) => {
         event.preventDefault();
         if(this.validateValues()) {
             alert('Current state is: ' + JSON.stringify(this.state));
-            console.log('Current state is: ' + JSON.stringify(this.state));
+            const newChild = {
+                name: this.state.name,
+                birthDate: this.state.birthDate,
+                gender: this.state.gender
+            }
+            this.props.handleAddChildrenToList(newChild)
+            console.log('Current state is: ' + JSON.stringify(newChild));
+            this.setState(this.initialState)
         }
     }
 
