@@ -12,13 +12,15 @@ export default class CardButtonControlComponent extends Component {
     
     constructor(props) {
         super(props);
-        this.handleAddBtnClick = this.handleAddBtnClick.bind(this);
-        this.handleEditBtnClick = this.handleEditBtnClick.bind(this);
-        this.handleDelBtnClick = this.handleDelBtnClick.bind(this);
+
         this.state = {
             renderComponent: '',
             hasComponentToRender: false,
         };
+
+        this.handleAddBtnClick = this.handleAddBtnClick.bind(this);
+        this.handleEditBtnClick = this.handleEditBtnClick.bind(this);
+        this.handleDelBtnClick = this.handleDelBtnClick.bind(this);
     }
 
     handleAddBtnClick(){
@@ -47,36 +49,38 @@ export default class CardButtonControlComponent extends Component {
 
         switch(componentName) {
             case ADD_COMPONENT:
-                return <ChildrenAddComponent />
+                return <ChildrenAddComponent 
+                            handleAddChildrenToList={this.props.handleAddChildrenToList}/>
             case EDIT_COMPONENT:
-                return <ChildrenEditComponent />
+                return <ChildrenEditComponent 
+                            childrenList={this.props.childrenList}
+                            handleEditedChildrenToList={this.props.handleEditedChildrenToList}
+                        />
             case DEL_COMPONENT:
-                return <ChildrenDelComponent />
+                return <ChildrenDelComponent
+                            childrenList={this.props.childrenList} 
+                            handleDeleteChildrenFromList={this.props.handleDeleteChildrenFromList}
+                        />
             default:
                 return <div></div>
         }
     }
 
     render() {
-        
         let component = this.getComponentToRender();
+        const btnCardComponent = <AddEditDelBtnCardComponent
+                                    handleAddBtnClick={this.handleAddBtnClick} 
+                                    handleEditBtnClick={this.handleEditBtnClick} 
+                                    handleDelBtnClick={this.handleDelBtnClick} />    
         return(
             <div>
                 {this.state.hasComponentToRender ?  
                     <div>
                         {component}
-                        <AddEditDelBtnCardComponent 
-                            handleAddBtnClick={this.handleAddBtnClick} 
-                            handleEditBtnClick={this.handleEditBtnClick} 
-                            handleDelBtnClick={this.handleDelBtnClick}
-                        />    
+                        {btnCardComponent}
                     </div> : 
                     <div>
-                        <AddEditDelBtnCardComponent 
-                            handleAddBtnClick={this.handleAddBtnClick} 
-                            handleEditBtnClick={this.handleEditBtnClick} 
-                            handleDelBtnClick={this.handleDelBtnClick}
-                        />
+                        {btnCardComponent}
                         {component}
                     </div>    
                 }
