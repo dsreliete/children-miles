@@ -1,41 +1,46 @@
 import React, { Component } from 'react';
 import Header from './HeaderComponent';
-import CardBtnControlComponent from './CardButtonControlComponent';
 import ChildrenList from './ChildrenListComponent';
+import ChildrenAddComponent from './ChildrenAddComponent';
+// import {childrenArray} from '../shared/childrenArray';
 
 class Main extends Component {
-    state = {
-        childrenList: []
-    };
 
-    handleAddChildrenToList = child => {
-        this.setState({
-            childrenList: [...this.state.childrenList, child]
-        });
-        console.log(this.state.childrenList)
+    constructor(props){
+        super(props)
+        this.state = {
+            childrenList: [], 
+            addComponent: false,
+            child: { id: 0, name: '', gender: '', birthDate: '' }
+        };
     }
 
-    handleDeleteChildrenFromList = index => {
-        const { childrenList } = this.state;
+    handleAddComponent = () => {
         this.setState({
-            childrenList: childrenList.filter((child, i) => { 
-                return i !== index;
-            })
-        });
+            addComponent: true
+        })
+    }
+
+    handleAddChildrenToList = child => {
+        console.log(child)
+        this.setState({
+            childrenList: [...this.state.childrenList, child]
+        })
     }
 
     render(){
         return(
             <div>
                 <Header />
-                <CardBtnControlComponent 
-                    childrenList={this.state.childrenList}
-                    handleAddChildrenToList={this.handleAddChildrenToList}
-                    handleDeleteChildrenFromList={this.handleDeleteChildrenFromList}
+                <ChildrenList
+                    showAddComponent={ this.handleAddComponent }
+                    childrenList={ this.state.childrenList }
                 />
-                <ChildrenList childrenList={this.state.childrenList} />
-                
-            </div>
+                <ChildrenAddComponent 
+                    show={this.state.addComponent}
+                    handleAddChildrenToList={this.handleAddChildrenToList}
+                />
+            </div>     
         );
     }
 }
