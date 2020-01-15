@@ -10,13 +10,13 @@ export default function ChildrenAddComponent(props) {
     const title = "Add Child";
     return (
         <div className="container-wrapper">
-            <TitleComponent title={title}/>     
-            <div className="row justify-content-center">
-                <div className="col m-3">
-                    <ChildrenForm 
-                        handleAddChildrenToList={props.handleAddChildrenToList}
-                    />
-                </div>
+            <div className="row">
+                <TitleComponent title={title}/>
+                    <div className="col-sm-12">
+                        <ChildrenForm 
+                            handleAddChildrenToList={props.handleAddChildrenToList}
+                        />
+                </div> 
             </div>
         </div>
     );

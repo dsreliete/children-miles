@@ -29,8 +29,8 @@ export default class ChildrenForm extends Component {
         return(
             <Form onSubmit={this.handleSubmit}>
                 <FormGroup row>
-                    <Label htmlFor="name" md={2}>Name</Label>
-                    <Col md={10}>
+                    <Label htmlFor="name" md={3}>Name</Label>
+                    <Col md={9}>
                         <Input type="text" id="name" name="name"
                             placeholder="Name"
                             value={this.state.name}
@@ -41,8 +41,8 @@ export default class ChildrenForm extends Component {
                     </Col>
                 </FormGroup>
                 <FormGroup row>
-                    <Label htmlFor="gender" md={2}>Gender</Label>
-                    <Col md={10}>
+                    <Label htmlFor="gender" md={3}>Gender</Label>
+                    <Col md={9}>
                         <FormGroup check>
                             <Label check>
                             <Input type="radio" id="female" name="gender"
@@ -61,8 +61,8 @@ export default class ChildrenForm extends Component {
                     </Col>
                 </FormGroup>
                 <FormGroup row>
-                    <Label htmlFor="dateBirth" md={2}>Birth date</Label>
-                    <Col md={10}>
+                    <Label htmlFor="dateBirth" md={3}>Birth date</Label>
+                    <Col md={9}>
                         <DatePicker
                             selected={this.state.birthDate}
                             onSelect={this.handleDateChange}
@@ -70,8 +70,8 @@ export default class ChildrenForm extends Component {
                     </Col>
                 </FormGroup>
                 <FormGroup row>
-                    <Col md={{size: 10, offset: 2}}>
-                        <Button type="submit" color="#009688" className="text-white btn-block mt-4">
+                    <Col md={{size: 12}}>
+                        <Button type="submit" color="#009688" className="text-white btn-block mt-2">
                             Add Child
                         </Button>
                     </Col>

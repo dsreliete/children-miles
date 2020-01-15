@@ -17,23 +17,23 @@ export default class ChildrenList extends Component {
                     />
                 </div>
                 <div className="row justify-content-center">
-                    { this.props.childrenList.length === 0 ?
-                        <div className="col-4 m-3">
-                            <div className="card p-4 text-center">
-                                <h4>No child added!</h4>
+                    <div className="col-md-6">
+                        { this.props.childrenList.length === 0 ?
+                            <div className="card text-center pt-3">
+                                <p>No child added!</p>
                             </div>
-                        </div>
-                        : 
-                        <ul className="list-unstyled">
-                            { this.props.childrenList.map(child => {
-                                return (
-                                    <li key={child.id}>
-                                        <ChildrenItem child={child} />
-                                    </li>
-                                )})
-                            }
-                        </ul>
-                    }
+                            : 
+                            <ul className="list-unstyled">
+                                { this.props.childrenList.map(child => {
+                                    return (
+                                        <li key={child.id}>
+                                            <ChildrenItem child={child} />
+                                        </li>
+                                    )})
+                                }
+                            </ul>
+                        }
+                    </div>
                 </div>
             </div>
         );
