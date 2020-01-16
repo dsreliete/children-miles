@@ -78,7 +78,7 @@ export default class ChildrenForm extends Component {
 
                     <Col md={{size: 4}} className="text-center my-2">
                         <Button type="reset" onClick={() => this.submitValuesAndHandleComponent(true)} className="btn-warning btn-block mr-3">
-                            Add + child
+                            Save and add another
                         </Button>
                     </Col>
                 </FormGroup>
