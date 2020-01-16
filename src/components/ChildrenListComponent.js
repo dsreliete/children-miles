@@ -17,12 +17,14 @@ export default class ChildrenList extends Component {
                     />
                 </div>
                 <div className="row justify-content-center">
-                    <div className="col-md-6">
-                        { this.props.childrenList.length === 0 ?
-                            <div className="card text-center pt-3">
+                    { this.props.childrenList.length === 0 ?
+                        <div className="col-sm-3">
+                            <div className="card bg-warning text-center pt-3">
                                 <p>No child added!</p>
                             </div>
-                            : 
+                        </div>
+                        : 
+                        <div className="col-sm-6">
                             <ul className="list-unstyled">
                                 { this.props.childrenList.map(child => {
                                     return (
@@ -32,8 +34,8 @@ export default class ChildrenList extends Component {
                                     )})
                                 }
                             </ul>
-                        }
-                    </div>
+                        </div>
+                    }
                 </div>
             </div>
         );

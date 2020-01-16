@@ -30,7 +30,7 @@ export default class ChildrenForm extends Component {
             <Form onSubmit={this.handleSubmit}>
                 <FormGroup row>
                     <Label htmlFor="name" md={3}>Name</Label>
-                    <Col md={9}>
+                    <Col md={6}>
                         <Input type="text" id="name" name="name"
                             placeholder="Name"
                             value={this.state.name}
@@ -69,14 +69,16 @@ export default class ChildrenForm extends Component {
                         />
                     </Col>
                 </FormGroup>
-                <FormGroup row>
-                    <Col md={{size: 6}} className="justify-content-center">
-                        <Button type="submit" color="#009688" className="text-white m-2">
-                            Add Child
+                <FormGroup row className="justify-content-center">
+                    <Col md={{size: 4}} className="text-center my-2">
+                        <Button type="submit" className="btn-warning btn-block mr-3">
+                            Add child
                         </Button>
+                    </Col>
 
-                        <Button type="reset" onClick={() => this.submitValuesAndHandleComponent(true)} color="#009688" className="text-white m-2">
-                            Add more Child
+                    <Col md={{size: 4}} className="text-center my-2">
+                        <Button type="reset" onClick={() => this.submitValuesAndHandleComponent(true)} className="btn-warning btn-block mr-3">
+                            Add + child
                         </Button>
                     </Col>
                 </FormGroup>

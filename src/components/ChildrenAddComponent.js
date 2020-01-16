@@ -9,7 +9,7 @@ export default function ChildrenAddComponent(props) {
         <div className="container-wrapper">
             <div className="row">
                 <TitleComponent title={title}/>
-                    <div className="col-sm-12">
+                    <div className="col">
                         <ChildrenForm
                             showAddComponent={ props.showAddComponent }
                             hideAddComponent={ props.hideAddComponent }
