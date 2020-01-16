@@ -61,7 +61,7 @@ export default class ChildrenForm extends Component {
                     </Col>
                 </FormGroup>
                 <FormGroup row>
-                    <Label htmlFor="dateBirth" md={3}>Birth date</Label>
+                    <Label htmlFor="dateBirth" md={3}>Birthday date</Label>
                     <Col md={9}>
                         <DatePicker
                             selected={this.state.birthDate}
