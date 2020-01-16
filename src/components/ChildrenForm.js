@@ -70,9 +70,13 @@ export default class ChildrenForm extends Component {
                     </Col>
                 </FormGroup>
                 <FormGroup row>
-                    <Col md={{size: 12}}>
-                        <Button type="submit" color="#009688" className="text-white btn-block mt-2">
+                    <Col md={{size: 6}} className="justify-content-center">
+                        <Button type="submit" color="#009688" className="text-white m-2">
                             Add Child
+                        </Button>
+
+                        <Button type="reset" onClick={() => this.submitValuesAndHandleComponent(true)} color="#009688" className="text-white m-2">
+                            Add more Child
                         </Button>
                     </Col>
                 </FormGroup>
@@ -102,6 +106,11 @@ export default class ChildrenForm extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
+
+        this.submitValuesAndHandleComponent(false)
+    }
+
+    submitValuesAndHandleComponent(keepComponent) {
         if(this.validateValues()) {
             this.handleIdChild()
             const newChild = {
@@ -111,6 +120,7 @@ export default class ChildrenForm extends Component {
                 gender: this.state.gender
             }
             this.props.handleAddChildrenToList(newChild)
+            keepComponent ? this.props.showAddComponent() : this.props.hideAddComponent()
             this.setState(this.initialState)
         }
     }

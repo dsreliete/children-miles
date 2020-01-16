@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Header from './HeaderComponent';
 import ChildrenList from './ChildrenListComponent';
 import ChildrenAddComponent from './ChildrenAddComponent';
-// import {childrenArray} from '../shared/childrenArray';
 
 class Main extends Component {
 
@@ -21,10 +20,15 @@ class Main extends Component {
         })
     }
 
-    handleAddChildrenToList = child => {
-        console.log(child)
+    handleHideComponent = () => {
         this.setState({
-            childrenList: [...this.state.childrenList, child]
+            addComponent: false
+        })
+    }
+
+    handleAddChildrenToList = (child) => {
+        this.setState({
+            childrenList: [...this.state.childrenList, child] 
         })
     }
 
@@ -36,10 +40,15 @@ class Main extends Component {
                     showAddComponent={ this.handleAddComponent }
                     childrenList={ this.state.childrenList }
                 />
-                <ChildrenAddComponent 
-                    show={this.state.addComponent}
-                    handleAddChildrenToList={this.handleAddChildrenToList}
-                />
+                {this.state.addComponent ?
+                    <ChildrenAddComponent
+                        showAddComponent={ this.handleAddComponent }
+                        hideAddComponent={ this.handleHideComponent }
+                        handleAddChildrenToList={ this.handleAddChildrenToList }
+                    />
+                    :
+                    null
+                }
             </div>     
         );
     }
