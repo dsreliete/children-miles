@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import Header from './HeaderComponent';
 import ChildrenList from './ChildrenListComponent';
 import ChildrenAddComponent from './ChildrenAddComponent';
-
+import {childrenArray} from '../shared/childrenArray';
 class Main extends Component {
 
     constructor(props){
         super(props)
         this.state = {
-            childrenList: [], 
+            childrenList: childrenArray, 
             addComponent: false,
             child: { id: 0, name: '', gender: '', birthDate: '' }
         };
