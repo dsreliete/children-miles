@@ -70,13 +70,13 @@ export default class ChildrenForm extends Component {
                     </Col>
                 </FormGroup>
                 <FormGroup row className="justify-content-center">
-                    <Col md={{size: 4}} className="text-center my-2">
+                    <Col md={{size: 3}} className="text-center my-2">
                         <Button type="submit" className="btn-warning btn-block mr-3">
                             Add child
                         </Button>
                     </Col>
 
-                    <Col md={{size: 4}} className="text-center my-2">
+                    <Col md={{size: 3}} className="text-center my-2">
                         <Button type="reset" onClick={() => this.submitValuesAndHandleComponent(true)} className="btn-warning btn-block mr-3">
                             Save and add another
                         </Button>
