@@ -14,7 +14,7 @@ export default class ChildrenForm extends Component {
             id: this.id,
             name: '',
             gender: '',
-            birthDate: new Date(),
+            // birthDate: new Date(),
             touched: {
                 name: false,
             }, 
@@ -60,7 +60,7 @@ export default class ChildrenForm extends Component {
                         </FormGroup>
                     </Col>
                 </FormGroup>
-                <FormGroup row>
+                {/* <FormGroup row>
                     <Label htmlFor="dateBirth" md={3}>Birthday date</Label>
                     <Col md={9}>
                         <DatePicker
@@ -68,7 +68,7 @@ export default class ChildrenForm extends Component {
                             onSelect={this.handleDateChange}
                         />
                     </Col>
-                </FormGroup>
+                </FormGroup> */}
                 <FormGroup row className="justify-content-center">
                     <Col md={{size: 3}} className="text-center my-2">
                         <Button type="submit" className="btn-warning btn-block mr-3">
@@ -118,7 +118,7 @@ export default class ChildrenForm extends Component {
             const newChild = {
                 id: this.id,
                 name: this.state.name,
-                birthDate: this.state.birthDate,
+                // birthDate: this.state.birthDate,
                 gender: this.state.gender
             }
             this.props.handleAddChildrenToList(newChild)
