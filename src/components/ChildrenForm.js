@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Form, FormGroup, Label, Input, Col, FormFeedback } from 'reactstrap';
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+// import DatePicker from "react-datepicker";
+// import "react-datepicker/dist/react-datepicker.css";
 
 
 export default class ChildrenForm extends Component {
@@ -122,7 +122,7 @@ export default class ChildrenForm extends Component {
                 gender: this.state.gender
             }
             this.props.handleAddChildrenToList(newChild)
-            keepComponent ? this.props.showAddComponent() : this.props.hideAddComponent()
+            keepComponent ? this.props.showComponent() : this.props.hideComponent()
             this.setState(this.initialState)
         }
     }

@@ -9,20 +9,20 @@ class Main extends Component {
         super(props)
         this.state = {
             childrenList: childrenArray, 
-            addComponent: false,
+            showComponent: false,
             child: { id: 0, name: '', gender: '', birthDate: '' }
         };
     }
 
-    handleAddComponent = () => {
+    handleShowComponent = () => {
         this.setState({
-            addComponent: true
+            showComponent: true
         })
     }
 
     handleHideComponent = () => {
         this.setState({
-            addComponent: false
+            showComponent: false
         })
     }
 
@@ -37,13 +37,13 @@ class Main extends Component {
             <div>
                 <Header />
                 <ChildrenList
-                    showAddComponent={ this.handleAddComponent }
+                    showComponent={ this.handleShowComponent }
                     childrenList={ this.state.childrenList }
                 />
-                {this.state.addComponent ?
+                {this.state.showComponent ?
                     <ChildrenAddComponent
-                        showAddComponent={ this.handleAddComponent }
-                        hideAddComponent={ this.handleHideComponent }
+                        showComponent={ this.handleShowComponent }
+                        hideComponent={ this.handleHideComponent }
                         handleAddChildrenToList={ this.handleAddChildrenToList }
                     />
                     :
