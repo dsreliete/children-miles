@@ -32,6 +32,14 @@ class Main extends Component {
         })
     }
 
+    handleEditChildren = (editedChild) => {
+        const editedList = this.state.childrenList.map(
+            child => child.id === editedChild.id ? editedChild : child)
+        this.setState({
+            childrenList: editedList 
+        })
+    }
+
     render(){
         return(
             <div>
@@ -39,8 +47,9 @@ class Main extends Component {
                 <ChildrenList
                     showComponent={ this.handleShowComponent }
                     childrenList={ this.state.childrenList }
+                    handleEditChildren={ this.handleEditChildren }
                 />
-                {this.state.showComponent ?
+                { this.state.showComponent ?
                     <ChildrenAddComponent
                         showComponent={ this.handleShowComponent }
                         hideComponent={ this.handleHideComponent }

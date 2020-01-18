@@ -10,9 +10,9 @@ export default function ChildrenList(props) {
         <div className="container-wrapper">
             <div className="row">
                 <TitleComponent 
-                    title={title} 
-                    icon={icon} 
-                    showComponent={props.showComponent} 
+                    title={ title } 
+                    icon={ icon } 
+                    showComponent={ props.showComponent }
                 />
             </div>
             <div className="row justify-content-center">
@@ -27,8 +27,11 @@ export default function ChildrenList(props) {
                         <ul className="list-unstyled">
                             { props.childrenList.map(child => {
                                 return (
-                                    <li key={child.id}>
-                                        <ChildrenItem child={child} />
+                                    <li key={ child.id }>
+                                        <ChildrenItem 
+                                            child={ child }
+                                            handleEditChildren={ props.handleEditChildren }
+                                        />
                                     </li>
                                 )})
                             }

@@ -20,11 +20,20 @@ export default class ChildrenForm extends Component {
             }, 
             validated: false
         }
-        this.state = this.initialState
+
+        if(this.props.child) {
+            this.currentChild = this.props.child
+            this.currentChild.touched = { name: false }
+            this.currentChild.validated = false
+            this.state = this.props.child
+        } else{
+            this.state = this.initialState
+        }
         this.handleInputChange = this.handleInputChange.bind(this);
     }
 
     render() {
+        const button = this.getFormButton();
         const errors = this.checkData(this.state.name);
         return(
             <Form onSubmit={this.handleSubmit}>
@@ -70,17 +79,7 @@ export default class ChildrenForm extends Component {
                     </Col>
                 </FormGroup> */}
                 <FormGroup row className="justify-content-center">
-                    <Col md={{size: 3}} className="text-center my-2">
-                        <Button type="submit" className="btn-warning btn-block mr-3">
-                            Add child
-                        </Button>
-                    </Col>
-
-                    <Col md={{size: 3}} className="text-center my-2">
-                        <Button type="reset" onClick={() => this.submitValuesAndHandleComponent(true)} className="btn-warning btn-block mr-3">
-                            Save and add another
-                        </Button>
-                    </Col>
+                    {button}
                 </FormGroup>
             </Form>
         );
@@ -106,6 +105,12 @@ export default class ChildrenForm extends Component {
         this.id++;
     }
 
+    handleBlur = (field) => () => {
+        this.setState({
+            touched: {...this.state.touched, [field]: true}
+        });
+    }
+
     handleSubmit = (event) => {
         event.preventDefault();
 
@@ -121,16 +126,16 @@ export default class ChildrenForm extends Component {
                 // birthDate: this.state.birthDate,
                 gender: this.state.gender
             }
-            this.props.handleAddChildrenToList(newChild)
-            keepComponent ? this.props.showComponent() : this.props.hideComponent()
+
+            if(this.props.child){
+                this.props.handleEditChildren(newChild)
+                this.props.handleToggleModal()
+            } else {
+                this.props.handleAddChildrenToList(newChild)
+                keepComponent ? this.props.showComponent() : this.props.hideComponent()
+            }
             this.setState(this.initialState)
         }
-    }
-
-    handleBlur = (field) => () => {
-        this.setState({
-            touched: {...this.state.touched, [field]: true}
-        });
     }
 
     validateValues = () => {
@@ -155,6 +160,36 @@ export default class ChildrenForm extends Component {
         }
 
         return errors;
+    }
+
+    getFormButton() {
+        if(this.props.child) {
+            return(
+                <>    
+                    <Col md={{size: 3}} className="text-center my-2">
+                        <Button type="submit" className="btn-warning btn-block mr-3">
+                            Edit child
+                        </Button>
+                    </Col>
+                </>
+            );
+        } else {
+            return (
+                <>    
+                    <Col md={{size: 3}} className="text-center my-2">
+                        <Button type="submit" className="btn-warning btn-block mr-3">
+                            Add child
+                        </Button>
+                    </Col>
+
+                    <Col md={{size: 3}} className="text-center my-2">
+                        <Button type="reset" onClick={() => this.submitValuesAndHandleComponent(true)} className="btn-warning btn-block mr-3">
+                            Save and add another
+                        </Button>
+                    </Col>
+                </>
+            );
+        }
     }
 
 }
