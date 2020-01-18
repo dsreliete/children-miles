@@ -20,6 +20,10 @@ export default class ChildrenItem extends Component {
             isModalOpen: !this.state.isModalOpen
         });
     }
+
+    handleDeleteChild(child) {
+        this.props.handleDeleteChildren(child)
+    }
     
     render() {
 
@@ -40,7 +44,7 @@ export default class ChildrenItem extends Component {
                         <div className="col-2 justify-content-end align-self-center" onClick={this.toggleModal}>
                             <i className="fa fa-edit fa-2x"></i>
                         </div>
-                        <div className="col-2 justify-content-end align-self-center" onClick={() => console.log(child)}>
+                        <div className="col-2 justify-content-end align-self-center" onClick={() => this.handleDeleteChild(child)}>
                             <i className="fa fa-trash fa-2x"></i>
                         </div>
                     </div>

@@ -31,6 +31,7 @@ export default function ChildrenList(props) {
                                         <ChildrenItem 
                                             child={ child }
                                             handleEditChildren={ props.handleEditChildren }
+                                            handleDeleteChildren={ props.handleDeleteChildren }
                                         />
                                     </li>
                                 )})
