@@ -1,5 +1,7 @@
 import React, { Component }  from 'react';
 import SideNav, {MenuIcon} from './SideNavComponent';
+import Children from './ChildrenComponent';
+import TitleComponent from './TitleComponent';
 
 class Header extends Component {
     constructor(props){
@@ -42,10 +44,15 @@ class Header extends Component {
           }
         }
         return styles;
-      }
+    }
+
+    handleNavItem(item) {
+      this.setState({item: item})
+    }
 
     render() {
       let styles = this.getStyle();
+
       return (
         <>
           <div style={styles.topBar}>
@@ -58,11 +65,16 @@ class Header extends Component {
             onHideNav={()=>this.setState({showNav: false})}
             title={'Rodrigues Family'}
             titleStyle={styles.bg2}
-            items={[{title: 'Home', icon:'fa fa-home fa-lg'}, {title: 'Service', icon:'fa fa-info-circle fa-lg'}, {title:'About', icon:'fa fa-info-circle fa-lg'}, {title:'Contact', icon:'fa fa-info-circle fa-lg'}]}
+            items={[{title: 'Home', icon:'fa fa-home fa-lg'}, {title: 'Categoria', icon:'fa fa-info-circle fa-lg'}, {title:'Atividade', icon:'fa fa-info-circle fa-lg'}, {title:'Histórico', icon:'fa fa-info-circle fa-lg'}]}
             itemStyle={{backgroundColor: '#fff'}}
-            onItemClick={(item) => console.log(item)}
+            onItemClick={(item) => this.handleNavItem(item)}
             itemHoverStyle={{backgroundColor: '#b2dfdb'}} />
-        </>        
+            {this.state.item === "Home" ? <Children /> : 
+            this.state.item === "Categoria" ? <TitleComponent title={this.state.item}/> : 
+            this.state.item === "Atividade" ? <TitleComponent title={this.state.item}/> : 
+            this.state.item === "Histórico" ? <TitleComponent title={this.state.item}/> : 
+            null}  
+        </>      
       );
     }
 }
