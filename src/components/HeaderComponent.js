@@ -65,7 +65,11 @@ class Header extends Component {
             onHideNav={()=>this.setState({showNav: false})}
             title={'Rodrigues Family'}
             titleStyle={styles.bg2}
-            items={[{title: 'Home', icon:'fa fa-home fa-lg'}, {title: 'Categoria', icon:'fa fa-info-circle fa-lg'}, {title:'Atividade', icon:'fa fa-info-circle fa-lg'}, {title:'Histórico', icon:'fa fa-info-circle fa-lg'}]}
+            items={[{title: 'Home', icon:'fa fa-home fa-lg'}, 
+            {title: 'Categoria', icon:'fa fa-info-circle fa-lg'}, 
+            {title:'Atividade', icon:'fa fa-info-circle fa-lg'}, 
+            {title:'Histórico', icon:'fa fa-info-circle fa-lg'}
+            ]}
             itemStyle={{backgroundColor: '#fff'}}
             onItemClick={(item) => this.handleNavItem(item)}
             itemHoverStyle={{backgroundColor: '#b2dfdb'}} />
