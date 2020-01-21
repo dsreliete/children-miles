@@ -1,75 +1,51 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import Header from './HeaderComponent';
 import ChildrenList from './ChildrenListComponent';
 import ChildrenAddComponent from './ChildrenAddComponent';
-import {childrenArray} from '../shared/childrenArray';
-class Main extends Component {
 
-    constructor(props){
-        super(props)
-        this.state = {
-            childrenList: childrenArray, 
-            showComponent: false,
-            child: { id: 0, name: '', gender: '', birthDate: '' }
-        };
+const Main = () => {
+    
+    const [ childList, setChildList ] = useState([])
+    const [ showComp, setShowComp ] = useState(false)
+
+    const handleShowComponent = () => setShowComp(true)
+    const handleHideComponent = () => setShowComp(false)
+    const handleAddChildrenToList = (child) => {
+        child.id = childList.length + 1
+        setChildList([...childList, child])
+    }
+    
+    const handleEditChildrenFromList = (editedChild) => {
+        const editedList = childList.map(child => (child.id === editedChild.id ? editedChild : child))
+        setChildList(editedList)
     }
 
-    handleShowComponent = () => {
-        this.setState({
-            showComponent: true
-        })
+    const handleDeleteChildrenFromList = (deletedChild) => {
+        const editedList = childList.filter(child => child.id !== deletedChild.id)
+        setChildList(editedList)
     }
 
-    handleHideComponent = () => {
-        this.setState({
-            showComponent: false
-        })
-    }
-
-    handleAddChildrenToList = (child) => {
-        this.setState({
-            childrenList: [...this.state.childrenList, child] 
-        })
-    }
-
-    handleEditChildrenFromList = (editedChild) => {
-        const editedList = this.state.childrenList.map(
-            child => child.id === editedChild.id ? editedChild : child)
-        this.setState({
-            childrenList: editedList 
-        })
-    }
-
-    handleDeleteChildrenFromList = (deletedChild) => {
-        const editedList = this.state.childrenList.filter(
-            child => child.id !== deletedChild.id)
-        this.setState({
-            childrenList: editedList 
-        })
-    }
-
-    render(){
-        return(
-            <div>
-                <Header />
-                <ChildrenList
-                    showComponent={ this.handleShowComponent }
-                    childrenList={ this.state.childrenList }
-                    handleEditChildren={ this.handleEditChildrenFromList }
-                    handleDeleteChildren={ this.handleDeleteChildrenFromList }
+    return(
+        <div>
+            <Header />
+            <ChildrenList
+                showComponent={ handleShowComponent }
+                childrenList={ childList }
+                handleEditChildren={ handleEditChildrenFromList }
+                handleDeleteChildren={ handleDeleteChildrenFromList }
+            />
+            { showComp ?
+                <ChildrenAddComponent
+                    childrenList={ childList }
+                    showComponent={ handleShowComponent }
+                    hideComponent={ handleHideComponent }
+                    handleAddChildrenToList={ handleAddChildrenToList }
                 />
-                { this.state.showComponent ?
-                    <ChildrenAddComponent
-                        showComponent={ this.handleShowComponent }
-                        hideComponent={ this.handleHideComponent }
-                        handleAddChildrenToList={ this.handleAddChildrenToList }
-                    />
-                    :
-                    null
-                }
-            </div>     
-        );
-    }
+                :
+                null
+            }
+        </div>     
+    );
 }
 
 export default Main;

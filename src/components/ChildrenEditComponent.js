@@ -8,7 +8,7 @@ export default function ChildrenEditComponent(props) {
     return (
         <div className="container-wrapper">
             <div className="row">
-                <TitleComponent title={title}/>
+                <TitleComponent title={ title }/>
                     <div className="col">
                         <ChildrenForm
                             child={ props.child }

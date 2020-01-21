@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Form, FormGroup, Label, Input, Col, FormFeedback } from 'reactstrap';
-// import DatePicker from "react-datepicker";
-// import "react-datepicker/dist/react-datepicker.css";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 
 export default class ChildrenForm extends Component {
@@ -9,12 +9,11 @@ export default class ChildrenForm extends Component {
     constructor(props) {
         super(props)
         
-        this.id = 0
         this.initialState = {
-            id: this.id,
+            id: 0,
             name: '',
             gender: '',
-            // birthDate: new Date(),
+            birthDate: new Date(),
             touched: {
                 name: false,
             }, 
@@ -69,7 +68,7 @@ export default class ChildrenForm extends Component {
                         </FormGroup>
                     </Col>
                 </FormGroup>
-                {/* <FormGroup row>
+                <FormGroup row>
                     <Label htmlFor="dateBirth" md={3}>Birthday date</Label>
                     <Col md={9}>
                         <DatePicker
@@ -77,7 +76,7 @@ export default class ChildrenForm extends Component {
                             onSelect={this.handleDateChange}
                         />
                     </Col>
-                </FormGroup> */}
+                </FormGroup>
                 <FormGroup row className="justify-content-center">
                     {button}
                 </FormGroup>
@@ -101,10 +100,6 @@ export default class ChildrenForm extends Component {
         });
     }
 
-    handleIdChild = () => {
-        this.id++;
-    }
-
     handleBlur = (field) => () => {
         this.setState({
             touched: {...this.state.touched, [field]: true}
@@ -119,11 +114,10 @@ export default class ChildrenForm extends Component {
 
     submitValuesAndHandleComponent(keepComponent) {
         if(this.validateValues()) {
-            this.handleIdChild()
             const newChild = {
-                id: this.id,
+                id: this.state.id,
                 name: this.state.name,
-                // birthDate: this.state.birthDate,
+                birthDate: this.state.birthDate,
                 gender: this.state.gender
             }
 

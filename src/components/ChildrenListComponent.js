@@ -28,7 +28,7 @@ export default function ChildrenList(props) {
                             { props.childrenList.map(child => {
                                 return (
                                     <li key={ child.id }>
-                                        <ChildrenItem 
+                                        <ChildrenItem
                                             child={ child }
                                             handleEditChildren={ props.handleEditChildren }
                                             handleDeleteChildren={ props.handleDeleteChildren }
