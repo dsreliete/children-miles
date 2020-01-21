@@ -1,6 +1,6 @@
 import React, { Component }  from 'react';
 import SideNav, {MenuIcon} from './SideNavComponent';
-import Children from './ChildrenComponent';
+import Children from './children/ChildrenComponent';
 import TitleComponent from './TitleComponent';
 
 class Header extends Component {

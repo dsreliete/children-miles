@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Modal, ModalHeader, ModalBody } from 'reactstrap';
-import TitleModalComponent from './TitleModalComponent';
+import TitleModalComponent from '../TitleModalComponent';
 import ChildrenForm from './ChildrenForm';
 
 const ChildrenItem = props => {

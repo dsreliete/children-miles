@@ -1,6 +1,6 @@
 import React from 'react';
 import ChildrenItem from './ChildrenItem';
-import TitleComponent from './TitleComponent';
+import TitleComponent from '../TitleComponent';
 
 export default function ChildrenList(props) {
 
