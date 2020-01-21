@@ -14,6 +14,7 @@ class SideNav extends React.Component {
     this.update = this.update.bind(this);
     this.getStyle = this.getStyle.bind(this);
     this.onItemClick = this.onItemClick.bind(this);
+    this.onIconClick = this.onIconClick.bind(this);
   }
 
   hideNav() {
@@ -55,6 +56,11 @@ class SideNav extends React.Component {
 
   onItemClick(title) {
     this.props.onItemClick(title)
+    this.hideNav()
+  }
+
+  onIconClick() {
+    this.props.onIconClick()
     this.hideNav()
   }
 
@@ -106,7 +112,7 @@ class SideNav extends React.Component {
       <div>
         <div style={styles.title}>
           <img style={styles.logo} src="/assets/images/family.jpg" alt="family" width="90px" className="rounded-circle"/>
-          <h3 className="mt-3">{this.props.title || 'Simple SideNav'}</h3>
+          <h3 className="mt-3">{this.props.title || 'Simple SideNav'}<i className="fa fa-cog fa-1x ml-5" onClick={() => this.onIconClick()}></i></h3>
         </div>
         <ul style={styles.listUnstyled}>
           { 
@@ -207,7 +213,8 @@ SideNav.propTypes = {
   openFromRight:  PropTypes.bool,
   onHideNav:      PropTypes.func,
   onShowNav:      PropTypes.func,
-  // onItemClick:    PropTypes.func,
+  onItemClick:    PropTypes.func,
+  onIconClick:    PropTypes.func,
 }
 
 

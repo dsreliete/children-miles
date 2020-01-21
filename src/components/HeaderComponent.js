@@ -50,6 +50,10 @@ class Header extends Component {
       this.setState({item: item})
     }
 
+    handleIconItem() {
+      this.setState({item: "Family"})
+    }
+
     render() {
       let styles = this.getStyle();
 
@@ -65,19 +69,26 @@ class Header extends Component {
             onHideNav={()=>this.setState({showNav: false})}
             title={'Rodrigues Family'}
             titleStyle={styles.bg2}
-            items={[{title: 'Home', icon:'fa fa-home fa-lg'}, 
-            {title: 'Categoria', icon:'fa fa-info-circle fa-lg'}, 
-            {title:'Atividade', icon:'fa fa-info-circle fa-lg'}, 
-            {title:'Histórico', icon:'fa fa-info-circle fa-lg'}
+            items={[
+              {title: 'Home', icon:'fa fa-home fa-lg'}, 
+              {title: 'Categoria', icon:'fa fa-list fa-lg'}, 
+              {title:'Atividade', icon:'fa fa-thumbs-up fa-lg'}, 
+              {title:'Penalidade', icon:'fa fa-thumbs-down fa-lg'},
+              {title:'Prêmios', icon:'fa fa-gift fa-lg'},
+              {title:'Histórico', icon:'fa fa-calendar fa-lg'}
             ]}
             itemStyle={{backgroundColor: '#fff'}}
             onItemClick={(item) => this.handleNavItem(item)}
+            onIconClick={(item) => this.handleIconItem(item)}
             itemHoverStyle={{backgroundColor: '#b2dfdb'}} />
             {this.state.item === "Home" ? <Children /> : 
-            this.state.item === "Categoria" ? <TitleComponent title={this.state.item}/> : 
-            this.state.item === "Atividade" ? <TitleComponent title={this.state.item}/> : 
-            this.state.item === "Histórico" ? <TitleComponent title={this.state.item}/> : 
-            null}  
+              this.state.item === "Categoria" ? <TitleComponent title={this.state.item}/> : 
+              this.state.item === "Atividade" ? <TitleComponent title={this.state.item}/> :
+              this.state.item === "Penalidade" ? <TitleComponent title={this.state.item}/> :
+              this.state.item === "Prêmios" ? <TitleComponent title={this.state.item}/> : 
+              this.state.item === "Histórico" ? <TitleComponent title={this.state.item}/> :
+              this.state.item === "Family" ? <TitleComponent title={this.state.item}/> : 
+              null}  
         </>      
       );
     }
