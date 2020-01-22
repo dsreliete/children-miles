@@ -25,10 +25,10 @@ const Children = () => {
     return(
         <>
         <ChildrenList
-                showComponent={ handleShowComponent }
-                childrenList={ childList }
-                handleEditChildren={ handleEditChildrenFromList }
-                handleDeleteChildren={ handleDeleteChildrenFromList }
+            showComponent={ handleShowComponent }
+            childrenList={ childList }
+            handleEditChildren={ handleEditChildrenFromList }
+            handleDeleteChildren={ handleDeleteChildrenFromList }
             />
             { showComp ?
                 <ChildrenAddComponent
