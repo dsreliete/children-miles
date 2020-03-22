@@ -40,7 +40,6 @@ export default class ChildrenForm extends Component {
                     <Label htmlFor="name" md={3}>Name</Label>
                     <Col md={6}>
                         <Input type="text" id="name" name="name"
-                            placeholder="Name"
                             value={this.state.name}
                             invalid={errors.name}
                             onBlur={this.handleBlur("name")}
@@ -175,7 +174,6 @@ export default class ChildrenForm extends Component {
                             Add child
                         </Button>
                     </Col>
-
                     <Col md={{size: 3}} className="text-center my-2">
                         <Button type="reset" onClick={() => this.submitValuesAndHandleComponent(true)} className="btn-warning btn-block mr-3">
                             Save and add another

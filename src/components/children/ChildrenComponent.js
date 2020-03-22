@@ -22,6 +22,7 @@ const Children = () => {
         const editedList = childList.filter(child => child.id !== deletedChild.id)
         setChildList(editedList)
     }
+    
     return(
         <>
         <ChildrenList
