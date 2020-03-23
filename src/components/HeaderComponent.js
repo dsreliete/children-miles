@@ -40,8 +40,6 @@ class Header extends Component {
                                         <h1>Família Martin</h1>
                                     </div>
                                 </div>
-                                
-                                
                             </div>
                         </div>
                     </div>
