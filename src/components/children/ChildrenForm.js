@@ -160,7 +160,7 @@ export default class ChildrenForm extends Component {
             return(
                 <>    
                     <Col md={{size: 3}} className="text-center my-2">
-                        <Button type="submit" className="btn-warning btn-block mr-3">
+                        <Button type="submit" className="btn btn-block mr-3">
                             Edit child
                         </Button>
                     </Col>
@@ -174,9 +174,9 @@ export default class ChildrenForm extends Component {
                             Add child
                         </Button>
                     </Col>
-                    <Col md={{size: 3}} className="text-center my-2">
+                    <Col md={{size: 4}} className="text-center my-2">
                         <Button type="reset" onClick={() => this.submitValuesAndHandleComponent(true)} className="btn-warning btn-block mr-3">
-                            Save and add another
+                            Save and add more
                         </Button>
                     </Col>
                 </>

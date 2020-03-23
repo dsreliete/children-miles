@@ -24,13 +24,7 @@ const Children = () => {
     }
     
     return(
-        <>
-        <ChildrenList
-            showComponent={ handleShowComponent }
-            childrenList={ childList }
-            handleEditChildren={ handleEditChildrenFromList }
-            handleDeleteChildren={ handleDeleteChildrenFromList }
-            />
+        <div className="container-component">
             { showComp ?
                 <ChildrenAddComponent
                     childrenList={ childList }
@@ -39,9 +33,14 @@ const Children = () => {
                     handleAddChildrenToList={ handleAddChildrenToList }
                 />
                 :
-                null
+                <ChildrenList
+                    showComponent={ handleShowComponent }
+                    childrenList={ childList }
+                    handleEditChildren={ handleEditChildrenFromList }
+                    handleDeleteChildren={ handleDeleteChildrenFromList }
+                />
             }
-        </>
+        </div>
     );
 }
 

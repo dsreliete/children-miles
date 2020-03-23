@@ -16,16 +16,11 @@ body {
   right: 16px;
 }
 
-.container-wrapper {
-  margin-left: 40px;
-  margin-right: 40px;
-  margin-top: 30px;
-  margin-bottom: 0px;
-}
-
-.card-img-overlay h5 {
-  color: white;
-  background-color: rgba(0, 0, 0, 0.5);
+.container-component {
+  margin-top: 60px;
+  margin-bottom: 60px;
+  margin-left: 100px;
+  margin-right: 100px;
 }
 
 .row-content {
@@ -89,6 +84,20 @@ body {
 
 .navbar-nav .nav-item .nav-link .i-menu:focus {
   color: #026440;
+}
+
+.rounded {
+  border-radius: 10px;
+  border-color: #026440;
+}
+
+.btn {
+  background-color: #026440;
+  color: white;
+}
+
+.hr {
+  background-color: #026440;
 }
 
 .page-enter {
