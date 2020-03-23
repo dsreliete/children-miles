@@ -18,9 +18,7 @@ export default function ChildrenList(props) {
             <div className="row justify-content-center">
                 { props.childrenList.length === 0 ?
                     <div className="col-sm-3">
-                        <div className="card bg-warning text-center pt-3">
-                            <p>No child added!</p>
-                        </div>
+                        <p className="text-center">No child added!</p>
                     </div>
                     : 
                     <div className="col-sm-6">
