@@ -6,14 +6,16 @@ const Family = (props) => {
 
     const title = "Family";
     return (
-        <div className="container-wrapper">
-            <div className="row">
-                <TitleComponent title={title}/>
-                    <div className="col mt-3">
+        <div className="container-component">
+            <div className="row justify-content-center">
+                <div className="col-lg-6">
+                    <TitleComponent title={title}/>
+                    <div className="card rounded p-5">
                         <FamilyForm 
                             setFamilyName={ props.setFamilyName }
                         />
-                    </div> 
+                    </div>
+                </div> 
             </div>
         </div>
     );
