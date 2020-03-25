@@ -1,6 +1,7 @@
 import React from 'react';
-import { Switch, Route, Redirect, withRouter } from 'react-router-dom'
+import { Switch, Route, Redirect } from 'react-router-dom'
 
+import Signup from './auth/SignupComponent';
 import Header from './HeaderComponent.js';
 import Home from './HomeComponent.js';
 import Family from './family/FamilyComponent.js';
@@ -10,8 +11,14 @@ import Penalty from './penalties/PenaltyComponent.js';
 import Award from './awards/AwardComponent.js';
 import History from './HistoryComponent.js';
 
-
 const Main = (props) => {
+
+    const SignupPage = () => {
+        return (
+            <Signup />
+        )
+    }
+    
 
     const HomePage = () => {
         return (
@@ -62,6 +69,7 @@ const Main = (props) => {
         <div>
             <Header />
             <Switch>
+                <Route exact path='/signup' component={SignupPage} />
                 <Route path='/home' component={HomePage} />
                 <Route path='/family' component={FamilyPage} />
                 <Route path='/child' component={ChildPage} />
