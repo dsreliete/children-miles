@@ -38,7 +38,7 @@ export default class ChildrenForm extends Component {
             <Form onSubmit={this.handleSubmit}>
                 <FormGroup row>
                     <Label htmlFor="name" md={3}>Name</Label>
-                    <Col md={6}>
+                    <Col >
                         <Input type="text" id="name" name="name"
                             value={this.state.name}
                             invalid={errors.name}
@@ -49,7 +49,7 @@ export default class ChildrenForm extends Component {
                 </FormGroup>
                 <FormGroup row>
                     <Label htmlFor="gender" md={3}>Gender</Label>
-                    <Col md={9}>
+                    <Col >
                         <FormGroup check>
                             <Label check>
                             <Input type="radio" id="female" name="gender"
@@ -69,8 +69,8 @@ export default class ChildrenForm extends Component {
                 </FormGroup>
                 <FormGroup row>
                     <Label htmlFor="dateBirth" md={3}>Birthday date</Label>
-                    <Col md={9}>
-                        <DatePicker
+                    <Col >
+                        <DatePicker 
                             selected={this.state.birthDate}
                             onSelect={this.handleDateChange}
                         />
