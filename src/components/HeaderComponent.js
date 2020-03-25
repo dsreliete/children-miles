@@ -36,7 +36,7 @@ class Header extends Component {
                             <div className="col">
                                 <div className="media align-self-center">
                                     <div href="/"><img src="/assets/images/logo.png" height="230" width="150" alt="Milhas Infantis Logo" /></div>
-                                    <div class="media-body align-self-center text-center">
+                                    <div className="media-body align-self-center text-center">
                                         <h1>Família Martin</h1>
                                     </div>
                                 </div>
