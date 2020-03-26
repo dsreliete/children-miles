@@ -5,14 +5,16 @@ import TitleComponent from '../TitleComponent';
 export default function ChildrenList(props) {
 
     const title = "Children";
-    const icon = "fa fa-plus-circle fa-2x justify-content-center mx-auto top-right"
+    const iconRight = "fa fa-plus-circle fa-2x justify-content-center mx-auto top-right"
+    const iconLeft = "fa fa-user fa-1x mr-3";
     return(
         <>
             <div className="row justify-content-center">
                 <div className="col-lg-6">
                     <TitleComponent 
                         title={ title } 
-                        icon={ icon } 
+                        iconRight={iconRight} 
+                        iconLeft={iconLeft}
                         showHideComponent={ props.showComponent }
                     />
                 </div>

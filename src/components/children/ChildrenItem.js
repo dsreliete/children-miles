@@ -21,6 +21,7 @@ const ChildrenItem = props => {
     const child = props.child;
     const imageSrc = child.gender === "female" ? "assets/images/maria.jpg" : "assets/images/joao.jpg"
     const title = "Edit Child";
+    const iconLeft = "fa fa-user fa-1x mr-3";
 
     return(
         <div className="p-3">
@@ -39,7 +40,7 @@ const ChildrenItem = props => {
             </div>
             <Modal isOpen={ isModalOpen } toggle={ toggleModal }>
                 <ModalHeader toggle={ toggleModal }>
-                    <TitleModalComponent title={ title }/>
+                    <TitleModalComponent title={ title } iconLeft={iconLeft} />
                 </ModalHeader>
                 <ModalBody>
                     <ChildrenForm
