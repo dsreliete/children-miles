@@ -96,8 +96,27 @@ body {
   color: white;
 }
 
-.hr {
-  background-color: #026440;
+.hr-title {
+  display: block; 
+  height: 1px;
+  border: 0; 
+  border-top: 1px solid;
+  margin: 1em 0; 
+  padding: 0;
+  color: #026440;
+}
+
+.footer-link {
+  color: #ac0379;
+}
+
+.footer-link-label {
+  margin-bottom: 0;
+  margin-top: 15px;
+}
+
+.payload-message {
+  color: blue;
 }
 
 .page-enter {
