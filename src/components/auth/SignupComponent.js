@@ -67,7 +67,7 @@ class Signup extends Component {
                                 <Row className="form-group">
                                     <Col >
                                         <Control.text model=".username" id="username" name="username"
-                                            placeholder="username"
+                                            placeholder="Username"
                                             className="form-control"
                                             validators={{
                                                 required, 
@@ -205,8 +205,8 @@ class Signup extends Component {
 
                             <Row >
                                 <Col className="text-center mt-3">
-                                    <h6 className="footer-link-label">Already signed up?</h6>
-                                    <Link to="/signin" className="footer-link">Click here to sign in</Link>
+                                    <h4 className="footer-link-label">Already signed up?</h4>
+                                    <Link to="/signin" className="footer-link"><h5>Click here to sign in</h5></Link>
                                 </Col>
                             </Row>
                         </div>
