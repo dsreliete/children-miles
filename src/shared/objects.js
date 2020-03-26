@@ -203,45 +203,14 @@ const associationArray = [
     {
         id: 1,
         status: true,
-        children: {
-            id: 1,
-            name: "Sheldon",
-            dtNasc: "01-25-2014",
-            gender: "male"
-    
-        },
-        goals : {
-            id: 1,
-            description: "Brush your teeth",
-            redPoint: 0,
-            yellowPoint: 5,
-            greenPoint: 35,
-            category : {
-                id: 1,
-                description: "Hygiene"
-            }
-        }
+        children: 1,
+        goals : 1
     },
     {
         id: 2,
         status: true,
-        children: {
-            id: 4,
-            name: "Maria Eduarda",
-            dtNasc: "09-18-2015",
-            gender: "female"
-        },
-        goals : {
-            id: 9,
-            description: "Best grades",
-            redPoint: 0,
-            yellowPoint: 50,
-            greenPoint: 100,
-            category : {
-                id: 2,
-                description: "School"
-            }
-        }
+        children: 4,
+        goals : 9
     }
 ]
 /*

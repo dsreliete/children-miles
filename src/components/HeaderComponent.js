@@ -1,96 +1,95 @@
 import React, { Component }  from 'react';
-import SideNav, {MenuIcon} from './SideNavComponent';
-import Children from './children/ChildrenComponent';
-import TitleComponent from './TitleComponent';
+import { Navbar, Nav, NavbarToggler, Collapse, NavItem, Jumbotron } from 'reactstrap';
+import { NavLink } from 'react-router-dom';
 
 class Header extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
+
         this.state = {
-            showNav : false,
-            item: 'Home'
+            isNavOpen: false,
+            isModalOpen: false
         };
+
+        this.toggleNav = this.toggleNav.bind(this);
+        this.toggleModal = this.toggleModal.bind(this);
     }
 
-    getStyle() {
-        let styles = {
-          topBar: {
-            padding: 12,
-            background: '#009688',
-            color: '#fff',
-            fontSize: '22px',
-          },
-          bg2: {
-            backgroundColor: '#FFC107',
-          },
-          menuIcon: {
-            marginRight: 16, 
-            color: '#fff',
-            verticalAlign: 'middle',
-          },
-          menuBar: {
-            width: '100%',
-            background: '#0AC',
-            color: '#fff',
-            display: 'flex',
-            alignItems: 'center',
-            position: 'fixed',
-            zIndex: 2,
-            top: 0,
-            paddingTop: 48,
-          },
-          list: {
-            listStyleType: 'none'
-          }
-        }
-        return styles;
+    toggleNav() {
+        this.setState({
+            isNavOpen: !this.state.isNavOpen
+        });
     }
 
-    handleNavItem(item) {
-      this.setState({item: item})
-    }
-
-    handleIconItem() {
-      this.setState({item: "Family"})
+    toggleModal() {
+        this.setState({
+            isModalOpen: !this.state.isModalOpen
+        });
     }
 
     render() {
-      let styles = this.getStyle();
-
-      return (
-        <>
-          <div style={styles.topBar}>
-              <MenuIcon onClick={()=>this.setState({showNav: true})} style={styles.menuIcon}/>
-              <img className="mr-3" src="/assets/images/icon.png" height="30" width="30" alt="Child Miles"/>
-              Milhas Infantis
-          </div>
-          <SideNav
-            showNav={this.state.showNav}
-            onHideNav={()=>this.setState({showNav: false})}
-            title={'Rodrigues Family'}
-            titleStyle={styles.bg2}
-            items={[
-              {title: 'Home', icon:'fa fa-home fa-lg'}, 
-              {title: 'Categoria', icon:'fa fa-list fa-lg'}, 
-              {title:'Atividade', icon:'fa fa-thumbs-up fa-lg'}, 
-              {title:'Penalidade', icon:'fa fa-thumbs-down fa-lg'},
-              {title:'Prêmios', icon:'fa fa-gift fa-lg'},
-              {title:'Histórico', icon:'fa fa-calendar fa-lg'}
-            ]}
-            itemStyle={{backgroundColor: '#fff'}}
-            onItemClick={(item) => this.handleNavItem(item)}
-            onIconClick={(item) => this.handleIconItem(item)}
-            itemHoverStyle={{backgroundColor: '#b2dfdb'}} />
-            {this.state.item === "Home" ? <Children /> : 
-              this.state.item === "Categoria" ? <TitleComponent title={this.state.item}/> : 
-              this.state.item === "Atividade" ? <TitleComponent title={this.state.item}/> :
-              this.state.item === "Penalidade" ? <TitleComponent title={this.state.item}/> :
-              this.state.item === "Prêmios" ? <TitleComponent title={this.state.item}/> : 
-              this.state.item === "Histórico" ? <TitleComponent title={this.state.item}/> :
-              this.state.item === "Family" ? <TitleComponent title={this.state.item}/> : 
-              null}  
-        </>      
-      );
+        return (
+            <React.Fragment>
+                <Jumbotron fluid>
+                    <div className="container">
+                        <div className="row">
+                            <div className="col">
+                                <div className="media align-self-center">
+                                    <div href="/"><img src="/assets/images/logo.png" height="230" width="150" alt="Milhas Infantis Logo" /></div>
+                                    <div className="media-body align-self-center text-center">
+                                        <h1>Família Martin</h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </Jumbotron>
+                <Navbar dark sticky="top" expand="md" className="justify-content-center">
+                    <div className="navbar-container">
+                        <NavbarToggler onClick={this.toggleNav} />
+                        <Collapse isOpen={this.state.isNavOpen} navbar>
+                            <Nav navbar>
+                                <NavItem>
+                                    <NavLink className="nav-link" to="/home">
+                                        <i className="fa fa-home fa-lg i-menu" /> Início
+                                    </NavLink>
+                                </NavItem>
+                                <NavItem>
+                                    <NavLink className="nav-link" to="/family">
+                                        <i className="fa fa-list fa-lg i-menu" /> Família
+                                    </NavLink>
+                                </NavItem>
+                                <NavItem>
+                                    <NavLink className="nav-link" to="/child">
+                                        <i className="fa fa-info fa-lg i-menu" /> Crianças
+                                    </NavLink>
+                                </NavItem>
+                                <NavItem>
+                                    <NavLink className="nav-link" to="/goals">
+                                        <i className="fa fa-address-card fa-lg i-menu" /> Tarefas
+                                    </NavLink>
+                                </NavItem>
+                                <NavItem>
+                                    <NavLink className="nav-link" to="/penalties">
+                                        <i className="fa fa-list fa-lg i-menu" /> Penalidades
+                                    </NavLink>
+                                </NavItem>
+                                <NavItem>
+                                    <NavLink className="nav-link" to="/awards">
+                                        <i className="fa fa-list fa-lg i-menu" /> Prêmios
+                                    </NavLink>
+                                </NavItem>
+                                <NavItem>
+                                    <NavLink className="nav-link" to="/history">
+                                        <i className="fa fa-info fa-lg i-menu" /> Histórico de Atividades
+                                    </NavLink>
+                                </NavItem>
+                            </Nav>
+                        </Collapse>
+                    </div>
+                </Navbar>
+            </React.Fragment>
+        );
     }
 }
 

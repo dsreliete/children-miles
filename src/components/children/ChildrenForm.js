@@ -38,9 +38,8 @@ export default class ChildrenForm extends Component {
             <Form onSubmit={this.handleSubmit}>
                 <FormGroup row>
                     <Label htmlFor="name" md={3}>Name</Label>
-                    <Col md={6}>
+                    <Col >
                         <Input type="text" id="name" name="name"
-                            placeholder="Name"
                             value={this.state.name}
                             invalid={errors.name}
                             onBlur={this.handleBlur("name")}
@@ -50,7 +49,7 @@ export default class ChildrenForm extends Component {
                 </FormGroup>
                 <FormGroup row>
                     <Label htmlFor="gender" md={3}>Gender</Label>
-                    <Col md={9}>
+                    <Col >
                         <FormGroup check>
                             <Label check>
                             <Input type="radio" id="female" name="gender"
@@ -70,8 +69,8 @@ export default class ChildrenForm extends Component {
                 </FormGroup>
                 <FormGroup row>
                     <Label htmlFor="dateBirth" md={3}>Birthday date</Label>
-                    <Col md={9}>
-                        <DatePicker
+                    <Col >
+                        <DatePicker 
                             selected={this.state.birthDate}
                             onSelect={this.handleDateChange}
                         />
@@ -161,7 +160,7 @@ export default class ChildrenForm extends Component {
             return(
                 <>    
                     <Col md={{size: 3}} className="text-center my-2">
-                        <Button type="submit" className="btn-warning btn-block mr-3">
+                        <Button type="submit" className="btn btn-block mr-3">
                             Edit child
                         </Button>
                     </Col>
@@ -175,10 +174,9 @@ export default class ChildrenForm extends Component {
                             Add child
                         </Button>
                     </Col>
-
-                    <Col md={{size: 3}} className="text-center my-2">
+                    <Col md={{size: 4}} className="text-center my-2">
                         <Button type="reset" onClick={() => this.submitValuesAndHandleComponent(true)} className="btn-warning btn-block mr-3">
-                            Save and add another
+                            Save and add more
                         </Button>
                     </Col>
                 </>

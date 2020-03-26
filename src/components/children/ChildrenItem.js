@@ -21,27 +21,26 @@ const ChildrenItem = props => {
     const child = props.child;
     const imageSrc = child.gender === "female" ? "assets/images/maria.jpg" : "assets/images/joao.jpg"
     const title = "Edit Child";
+    const iconLeft = "fa fa-user fa-1x mr-3";
 
     return(
-        <div className="col m-3">
-            <div className="card p-3">
-                <div className="media">
-                    <img className="img" src={ imageSrc } alt="child" />
-                    <div className="media-body ml-4 align-self-center">
-                        <p>{ child.name }</p>
-                        <p>{ child.birthDate.toISOString() }</p>
-                    </div>
-                    <div className="col-2 justify-content-end align-self-center" onClick={ toggleModal }>
-                        <i className="fa fa-edit fa-2x"></i>
-                    </div>
-                    <div className="col-2 justify-content-end align-self-center" onClick={ () => handleDeleteChild(child) }>
-                        <i className="fa fa-trash fa-2x"></i>
-                    </div>
+        <div className="p-3">
+            <div className="media">
+                <img className="img" src={ imageSrc } alt="child" />
+                <div className="media-body ml-4 align-self-center">
+                    <p>{ child.name }</p>
+                    <p>{ child.birthDate.toISOString() }</p>
+                </div>
+                <div className="col-2 mr-3 justify-content-end align-self-center" onClick={ toggleModal }>
+                    <i className="fa fa-edit fa-2x"></i>
+                </div>
+                <div className="col-2 justify-content-end align-self-center" onClick={ () => handleDeleteChild(child) }>
+                    <i className="fa fa-trash fa-2x"></i>
                 </div>
             </div>
             <Modal isOpen={ isModalOpen } toggle={ toggleModal }>
                 <ModalHeader toggle={ toggleModal }>
-                    <TitleModalComponent title={ title }/>
+                    <TitleModalComponent title={ title } iconLeft={iconLeft} />
                 </ModalHeader>
                 <ModalBody>
                     <ChildrenForm

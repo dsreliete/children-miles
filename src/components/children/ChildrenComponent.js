@@ -22,14 +22,9 @@ const Children = () => {
         const editedList = childList.filter(child => child.id !== deletedChild.id)
         setChildList(editedList)
     }
+    
     return(
-        <>
-        <ChildrenList
-                showComponent={ handleShowComponent }
-                childrenList={ childList }
-                handleEditChildren={ handleEditChildrenFromList }
-                handleDeleteChildren={ handleDeleteChildrenFromList }
-            />
+        <div className="container-component">
             { showComp ?
                 <ChildrenAddComponent
                     childrenList={ childList }
@@ -38,9 +33,14 @@ const Children = () => {
                     handleAddChildrenToList={ handleAddChildrenToList }
                 />
                 :
-                null
+                <ChildrenList
+                    showComponent={ handleShowComponent }
+                    childrenList={ childList }
+                    handleEditChildren={ handleEditChildrenFromList }
+                    handleDeleteChildren={ handleDeleteChildrenFromList }
+                />
             }
-        </>
+        </div>
     );
 }
 

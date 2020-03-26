@@ -5,25 +5,25 @@ import TitleComponent from '../TitleComponent';
 export default function ChildrenList(props) {
 
     const title = "Children";
-    const icon = "fa fa-plus-circle fa-2x justify-content-center mx-auto top-right"
+    const iconRight = "fa fa-plus-circle fa-2x justify-content-center mx-auto top-right"
+    const iconLeft = "fa fa-user fa-1x mr-3";
     return(
-        <div className="container-wrapper">
-            <div className="row">
-                <TitleComponent 
-                    title={ title } 
-                    icon={ icon } 
-                    showComponent={ props.showComponent }
-                />
+        <>
+            <div className="row justify-content-center">
+                <div className="col-lg-6">
+                    <TitleComponent 
+                        title={ title } 
+                        iconRight={iconRight} 
+                        iconLeft={iconLeft}
+                        showHideComponent={ props.showComponent }
+                    />
+                </div>
             </div>
             <div className="row justify-content-center">
-                { props.childrenList.length === 0 ?
-                    <div className="col-sm-3">
-                        <div className="card bg-warning text-center pt-3">
-                            <p>No child added!</p>
-                        </div>
-                    </div>
-                    : 
-                    <div className="col-sm-6">
+                <div className="col-lg-6">
+                    { props.childrenList.length === 0 ?
+                        <p className="text-center">No child added!</p>
+                        : 
                         <ul className="list-unstyled">
                             { props.childrenList.map(child => {
                                 return (
@@ -37,10 +37,10 @@ export default function ChildrenList(props) {
                                 )})
                             }
                         </ul>
-                    </div>
-                }
+                    }
+                </div>   
             </div>
-        </div>
+        </>
     );
     
 }
