@@ -6,7 +6,13 @@ export const signUp = (user) => dispatch => {
 
     signupService.signupUser(user)
     .then(
-        result => dispatch(signupSuccess(result)),
+        result => {
+            if(result.success){
+                dispatch(signupSuccess(result))
+            } else {
+                dispatch(signupError(result))
+            }
+        },
         error => dispatch(signupError(error))
     )
     .catch(err => {
