@@ -1,5 +1,6 @@
 import { signupService } from '../../_services';
 import * as ActionTypes from '../ActionTypes';
+import { history } from '../../history';
 
 export const signUp = (user) => dispatch => {
     dispatch(signupLoading());
@@ -8,7 +9,8 @@ export const signUp = (user) => dispatch => {
     .then(
         result => {
             if(result.success){
-                dispatch(signupSuccess(result))
+                //redirecionar para link com msg de email eniavo para verificacao e botao resend verification
+                history.push(`/signup/verifyEmail/:${result.token}`)
             } else {
                 dispatch(signupError(result))
             }

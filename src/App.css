@@ -40,7 +40,7 @@ body {
 }
 
 .navbar-dark { 
-  background-color: #ffc107;
+  background-color: #011910;
 }
 
 .navbar-nav .nav-item .nav-link:link {
@@ -88,12 +88,13 @@ body {
 
 .rounded {
   border-radius: 10px;
+  background-color: #011910;
   border-color: #026440;
 }
 
 .btn {
-  background-color: #026440;
-  color: white;
+  background-color: #ffc107;
+  color: #026440;
 }
 
 .hr-title {
@@ -107,16 +108,17 @@ body {
 }
 
 .footer-link {
-  color: #ac0379;
+  color: #ffc107;
 }
 
 .footer-link-label {
+  color: white;
   margin-bottom: 0;
   margin-top: 15px;
 }
 
 .payload-message {
-  color: blue;
+  color: white;
 }
 
 .page-enter {

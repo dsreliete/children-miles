@@ -10,6 +10,8 @@ import Goal from './goals/GoalComponent.js';
 import Penalty from './penalties/PenaltyComponent.js';
 import Award from './awards/AwardComponent.js';
 import History from './HistoryComponent.js';
+import VerifyEmail from './auth/VerifyEmailComponent';
+import SignupVerify from './auth/SignupVerifyComponent';
 
 const Main = (props) => {
 
@@ -64,6 +66,18 @@ const Main = (props) => {
         )
     }
 
+    const VerifyEmailPage = () => {
+        return(
+            <VerifyEmail />
+        )
+    }
+
+    const SignupVerifyPage = () => {
+        return(
+            <SignupVerify />
+        )
+    }
+
 
     return (
         <div>
@@ -77,6 +91,8 @@ const Main = (props) => {
                 <Route path='/goals' component={GoalPage} />
                 <Route path='/penalties' component={PenaltyPage} />
                 <Route path='/history' component={HistoryPage} />
+                <Route path='/signup/verifyEmail/:token' component={SignupVerifyPage} />
+                <Route path='/verifyEmail/:token' component={VerifyEmailPage} />
                 <Redirect to='/child' />
             </Switch>
         </div>

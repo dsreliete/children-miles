@@ -15,7 +15,6 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
-    
     resetSignupForm: () => (actions.reset('signupForm')),
     postSignup: (user) => (signUp(user))
 
@@ -76,7 +75,7 @@ class Signup extends Component {
                                             }}
                                         />
                                         <Errors
-                                            className="text-danger"
+                                            className="text-warning"
                                             model=".username"
                                             show="touched"
                                             component="div"
@@ -100,7 +99,7 @@ class Signup extends Component {
                                             }}
                                         />
                                         <Errors
-                                            className="text-danger"
+                                            className="text-warning"
                                             model=".password"
                                             show="touched"
                                             component="div"
@@ -124,7 +123,7 @@ class Signup extends Component {
                                             }}
                                         />
                                         <Errors
-                                            className="text-danger"
+                                            className="text-warning"
                                             model=".firstname"
                                             show="touched"
                                             component="div"
@@ -149,7 +148,7 @@ class Signup extends Component {
                                             }}
                                         />
                                         <Errors
-                                            className="text-danger"
+                                            className="text-warning"
                                             model=".lastname"
                                             show="touched"
                                             component="div"
@@ -173,7 +172,7 @@ class Signup extends Component {
                                             }}
                                         />
                                         <Errors
-                                            className="text-danger"
+                                            className="text-warning"
                                             model=".email"
                                             show="touched"
                                             component="div"
@@ -196,7 +195,6 @@ class Signup extends Component {
                                 <Col className="payload-message text-center mt-3">      
                                     {
                                         this.props.signup.isLoading ? <Loading/> :
-                                        this.props.signup.registered ? <h4>{this.props.signup.payload.result}</h4> :
                                         this.props.signup.error ? <h4>{this.props.signup.payload.result}</h4> :
                                         <div></div>
                                     }

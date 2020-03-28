@@ -1,6 +1,7 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import { BrowserRouter } from 'react-router-dom';
+import { Router } from 'react-router-dom';
+import { history } from './history';
 import './App.css';
 
 import Main from './components/MainComponent';
@@ -11,11 +12,11 @@ const store = ConfigureStore();
 function App() {
     return (
         <Provider store={store}>
-            <BrowserRouter>
+            <Router history={history}>
                 <div className="App">
                     <Main />
                 </div>
-            </BrowserRouter>
+            </Router>
         </Provider>
     );
 }
