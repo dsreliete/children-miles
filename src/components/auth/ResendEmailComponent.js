@@ -39,7 +39,7 @@ class ResendEmail extends Component {
     }
 
     render() {
-        const title = "Ativação de conta";
+        const title = "Verificação de Email";
         const iconLeft = "fa fa-registered fa-1x mr-3";
 
         return(
