@@ -81,12 +81,14 @@ const Main = (props) => {
                 <Route path='/goals' component={GoalPage} />
                 <Route path='/penalties' component={PenaltyPage} />
                 <Route path='/history' component={HistoryPage} />
-                <Route path='/verifyEmail/:token'  render={({match}) => (
-                    <VerifyEmail token={match.params.token}/>)
-                }/>
-                <Route path='/resendEmail/:email' render={({match}) => (
-                    <ResendEmail email={match.params.email}/>)
-                }/>
+                <Route path='/verifyEmail/:token'  
+                    render={({match}) => (
+                        <VerifyEmail token={match.params.token}/>)
+                    }/>
+                <Route path='/resendEmail/:email'   
+                    render={({match}) => (
+                        <ResendEmail email={match.params.email}/>)
+                    }/>
             </Switch>
         </div>
     );
