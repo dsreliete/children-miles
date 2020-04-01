@@ -73,7 +73,6 @@ const Main = (props) => {
         <div>
             <Header />
             <Switch>
-                <Route exact path='/signup' component={SignupPage} />
                 <Route path='/home' component={HomePage} />
                 <Route path='/family' component={FamilyPage} />
                 <Route path='/child' component={ChildPage} />
@@ -81,6 +80,7 @@ const Main = (props) => {
                 <Route path='/goals' component={GoalPage} />
                 <Route path='/penalties' component={PenaltyPage} />
                 <Route path='/history' component={HistoryPage} />
+                <Route path='/signup' component={SignupPage} />
                 <Route path='/verifyEmail/:token'  
                     render={({match}) => (
                         <VerifyEmail token={match.params.token}/>)
