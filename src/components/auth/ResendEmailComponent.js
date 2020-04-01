@@ -5,7 +5,8 @@ import { withRouter} from 'react-router-dom';
 import { resendEmailVerification } from '../../redux/_actions';
 
 import TitleComponent from '../TitleComponent';
-import { Loading } from '../LoadingComponent';
+import ResendEmailMessageButtonComponent from './ResendEmailMessageButtonComponent';
+import Loading from '../LoadingComponent';
 
 
 const mapStateToProps = state => {
@@ -55,16 +56,14 @@ class ResendEmail extends Component {
                                 <div className="col-lg-6">
                                 
                                 {
-                                    //deu bom no registro
                                     !this.state.resend && this.props.signup.signup && this.props.signup.payload.signup ?
                                         <h4 className="payload-message">{this.props.signup.payload.signup.message}</h4> 
                                     :
                                     <div></div> 
                                 }
-                                <div>
-                                    <h5>Verifique se recebeu um email de verificação de conta. Caso não tenha recebido, clique no botão abaixo para pedir novo reenvio</h5>
-                                    <div className="btn-warning btn-lg mt-3" onClick={this.handleResendEmail}> Reenviar email </div>  
-                                </div>
+                                <ResendEmailMessageButtonComponent 
+                                    handleResendEmail={this.handleResendEmail}    
+                                />
                                 {
                                     
                                     this.state.resend && this.props.signup.isLoading ? <Loading/> :
