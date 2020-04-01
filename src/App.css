@@ -87,14 +87,7 @@ body {
 }
 
 .rounded {
-  border-radius: 10px;
-  background-color: #011910;
   border-color: #026440;
-}
-
-.btn {
-  background-color: #ffc107;
-  color: #026440;
 }
 
 .hr-title {
@@ -108,17 +101,17 @@ body {
 }
 
 .footer-link {
-  color: #ffc107;
+  color: #C2185B;
 }
 
 .footer-link-label {
-  color: white;
+  color: black;
   margin-bottom: 0;
   margin-top: 15px;
 }
 
 .payload-message {
-  color: white;
+  color: blue;
 }
 
 .page-enter {

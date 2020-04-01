@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Button, Col, Row } from 'reactstrap';
 import { Control, Form, Errors, actions } from 'react-redux-form';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 
 import TitleComponent from '../TitleComponent';
 import { Loading } from '../LoadingComponent';
@@ -10,7 +10,7 @@ import { signUp } from '../../redux/_actions';
 
 const mapStateToProps = state => {
     return {
-        signup: state.signup
+        signup: state.signup,
     };
 };
 
@@ -26,15 +26,19 @@ class Signup extends Component {
         this.state = {
             username: '',
             password: '',
+            confirmPassword: '',
             firstname: '',
             lastname: '',
             email:'',
+            confirmEmail: '',
             touched: {
                 username: false,
                 password: false,
-                firstname: '',
-                lastname: '',
+                confirmPassword: false,
+                firstname: false,
+                lastname: false,
                 email: false,
+                confirmEmail: false,
             }
         }
     }
@@ -50,6 +54,8 @@ class Signup extends Component {
         const minLength = len => val => val && (val.length >= len);
         const validEmail = val => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(val);
         const validPassword = val => /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,12}$/i.test(val);
+        const passwordsMatch = (password, confirmPassword) => password === confirmPassword;
+        const emailMatch = (email, confirmEmail) => email === confirmEmail;
         const title = 'Registre-se';
         const iconLeft = "fa fa-registered fa-1x mr-3"
 
@@ -62,20 +68,32 @@ class Signup extends Component {
                             iconLeft={iconLeft}
                         />
                         <div className="card rounded p-5">
-                            <Form model="signupForm" onSubmit={values => this.handleSubmit(values)}>
+                            <Form 
+                                model="signupForm" 
+                                validators={{
+                                    '': {
+                                    // Form-level validator
+                                        passwordsMatch: (vals) => passwordsMatch(vals.password, vals.confirmPassword),
+                                        emailMatch: (vals) => emailMatch(vals.email, vals.confirmEmail)
+                                    },
+                                    // Field-level validators
+                                    password: { required, validPassword },
+                                    confirmPassword: { required },
+                                    email: { required, validEmail },
+                                    confirmEmail: { required },
+                                    lastname: { required, minLength: minLength(2), maxLength: maxLength(25) },
+                                    firstname: { required, minLength: minLength(2), maxLength: maxLength(25) },
+                                    username: { required, minLength: minLength(2), maxLength: maxLength(25) }
+                                }}
+                                onSubmit={values => this.handleSubmit(values)}>
                                 <Row className="form-group">
                                     <Col >
                                         <Control.text model=".username" id="username" name="username"
                                             placeholder="Username"
                                             className="form-control"
-                                            validators={{
-                                                required, 
-                                                minLength: minLength(2),
-                                                maxLength: maxLength(15)
-                                            }}
                                         />
                                         <Errors
-                                            className="text-warning"
+                                            className="text-danger"
                                             model=".username"
                                             show="touched"
                                             component="div"
@@ -93,13 +111,9 @@ class Signup extends Component {
                                         <Control type="password" model=".password" id="password" name="password"
                                             placeholder="Password"
                                             className="form-control"
-                                            validators={{
-                                                required,
-                                                validPassword
-                                            }}
                                         />
                                         <Errors
-                                            className="text-warning"
+                                            className="text-danger"
                                             model=".password"
                                             show="touched"
                                             component="div"
@@ -113,17 +127,30 @@ class Signup extends Component {
 
                                 <Row className="form-group">
                                     <Col >
+                                        <Control type="password" model=".confirmPassword" id="confirmPassword" name="confirmPassword"
+                                            placeholder="Confirm Password"
+                                            className="form-control"
+                                        />
+                                        <Errors
+                                            className="text-danger"
+                                            model=".confirmPassword"
+                                            show="touched"
+                                            component="div"
+                                            messages={{
+                                                required: 'Required',
+                                            }}
+                                        />
+                                    </Col>
+                                </Row>
+
+                                <Row className="form-group">
+                                    <Col >
                                         <Control.text model=".firstname" id="firstname" name="firstname"
                                             placeholder="First Name"
                                             className="form-control"
-                                            validators={{
-                                                required,
-                                                minLength: minLength(2),
-                                                maxLength: maxLength(15)
-                                            }}
                                         />
                                         <Errors
-                                            className="text-warning"
+                                            className="text-danger"
                                             model=".firstname"
                                             show="touched"
                                             component="div"
@@ -141,14 +168,9 @@ class Signup extends Component {
                                         <Control.text model=".lastname" id="lastname" name="lastname"
                                             placeholder="Last Name"
                                             className="form-control"
-                                            validators={{
-                                                required,
-                                                minLength: minLength(2),
-                                                maxLength: maxLength(25)
-                                            }}
                                         />
                                         <Errors
-                                            className="text-warning"
+                                            className="text-danger"
                                             model=".lastname"
                                             show="touched"
                                             component="div"
@@ -166,13 +188,9 @@ class Signup extends Component {
                                         <Control.text model=".email" id="email" name="email"
                                             placeholder="Email"
                                             className="form-control"
-                                            validators={{
-                                                required,
-                                                validEmail
-                                            }}
                                         />
                                         <Errors
-                                            className="text-warning"
+                                            className="text-danger"
                                             model=".email"
                                             show="touched"
                                             component="div"
@@ -183,10 +201,29 @@ class Signup extends Component {
                                         />
                                     </Col>
                                 </Row>
+
+                                <Row className="form-group">
+                                    <Col >
+                                        <Control.text model=".confirmEmail" id="confirmEmail" name="confirmEmail"
+                                            placeholder="Confirm Email"
+                                            className="form-control"
+                                        />
+                                        <Errors
+                                            className="text-danger"
+                                            model=".confirmEmail"
+                                            show="touched"
+                                            component="div"
+                                            messages={{
+                                                required: 'Required',
+                                                emailMatch: 'Deve ser igual senha anterior!'
+                                            }}
+                                        />
+                                    </Col>
+                                </Row>
                                 
                                 <Row className="form-group text-center">
                                     <Col >
-                                        <Button className="btn-lg mt-3" type="submit"> Send </Button>
+                                        <Button className="btn-warning btn-lg mt-3" type="submit"> Send </Button>
                                     </Col>
                                 </Row>
                             </Form>
@@ -195,7 +232,7 @@ class Signup extends Component {
                                 <Col className="payload-message text-center mt-3">      
                                     {
                                         this.props.signup.isLoading ? <Loading/> :
-                                        this.props.signup.error ? <h4>{this.props.signup.payload.result}</h4> :
+                                        this.props.signup.error ? <h4>{ this.props.signup.payload.signupError.message }</h4> :
                                         <div></div>
                                     }
                                 </Col>
@@ -216,4 +253,4 @@ class Signup extends Component {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Signup);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Signup));

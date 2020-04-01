@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom'
+import { Switch, Route } from 'react-router-dom'
 
 import Signup from './auth/SignupComponent';
 import Header from './HeaderComponent.js';
@@ -11,7 +11,7 @@ import Penalty from './penalties/PenaltyComponent.js';
 import Award from './awards/AwardComponent.js';
 import History from './HistoryComponent.js';
 import VerifyEmail from './auth/VerifyEmailComponent';
-import SignupVerify from './auth/SignupVerifyComponent';
+import ResendEmail from './auth/ResendEmailComponent';
 
 const Main = (props) => {
 
@@ -66,17 +66,7 @@ const Main = (props) => {
         )
     }
 
-    const VerifyEmailPage = () => {
-        return(
-            <VerifyEmail />
-        )
-    }
-
-    const SignupVerifyPage = () => {
-        return(
-            <SignupVerify />
-        )
-    }
+    
 
 
     return (
@@ -91,9 +81,12 @@ const Main = (props) => {
                 <Route path='/goals' component={GoalPage} />
                 <Route path='/penalties' component={PenaltyPage} />
                 <Route path='/history' component={HistoryPage} />
-                <Route path='/signup/verifyEmail/:token' component={SignupVerifyPage} />
-                <Route path='/verifyEmail/:token' component={VerifyEmailPage} />
-                <Redirect to='/child' />
+                <Route path='/verifyEmail/:token'  render={({match}) => (
+                    <VerifyEmail token={match.params.token}/>)
+                }/>
+                <Route path='/resendEmail/:email' render={({match}) => (
+                    <ResendEmail email={match.params.email}/>)
+                }/>
             </Switch>
         </div>
     );

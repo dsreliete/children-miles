@@ -3,5 +3,5 @@ export const InitialSignupForm = {
     password: '',
     firstname: '',
     lastname: '',
-    email: '',
+    email: ''
 };

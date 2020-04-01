@@ -6,16 +6,34 @@ export const signUp = (user) => dispatch => {
     dispatch(signupLoading());
 
     signupService.signupUser(user)
-    .then(
-        result => {
+    .then(result => {
             if(result.success){
-                //redirecionar para link com msg de email eniavo para verificacao e botao resend verification
-                history.push(`/signup/verifyEmail/:${result.token}`)
+                dispatch(signupSuccess(result))
+                //redirecionar para link com msg de sucesso envio de email para verificacao e botao resend verification email
+                history.push(`/resendEmail/:${user.email}`)
             } else {
                 dispatch(signupError(result))
             }
         },
         error => dispatch(signupError(error))
+    )
+    .catch(err => {
+        console.log(err)
+    });
+}
+
+export const resendEmailVerification = (email) => dispatch => {
+    dispatch(signupLoading());
+
+    signupService.resendEmail(email)
+    .then(result => {
+        if(result.success) {
+            dispatch(resendEmailSuccess(result))
+        } else {
+            dispatch(resendEmailFailure(result))
+        }
+    },
+    error => dispatch(resendEmailFailure(error))  
     )
     .catch(err => {
         console.log(err)
@@ -36,6 +54,16 @@ const signupError = (error) => ({
     payload: error
 })
 
+const resendEmailFailure = (error) => ({
+    type: ActionTypes.RESEND_EMAIL_FAILURE,
+    payload: error
+})
+
+const resendEmailSuccess = (result) => ({
+    type: ActionTypes.RESEND_EMAIL,
+    payload: result
+})
+
 export const signupAction = {
-    signUp
+    signUp, resendEmailVerification
 };
