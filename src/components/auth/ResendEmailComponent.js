@@ -61,7 +61,8 @@ class ResendEmail extends Component {
                                     :
                                     <div></div> 
                                 }
-                                <ResendEmailMessageButtonComponent 
+                                <ResendEmailMessageButtonComponent
+                                    message={'Verifique se recebeu um email de verificação de conta. Caso não tenha recebido, tente pedir outro envio de email para verificação de conta!'}
                                     handleResendEmail={this.handleResendEmail}    
                                 />
                                 {
