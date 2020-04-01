@@ -40,6 +40,32 @@ export const resendEmailVerification = (email) => dispatch => {
     });
 }
 
+export const verifyEmailTofetchUser = (token) => dispatch => {
+    dispatch(signupLoading());
+
+    signupService.verifyEmail(token)
+    .then(result => {
+        if(result.success) {
+            dispatch(signupAuth);
+            localStorage.setItem('user', result.user);
+            history.push("/home")
+        } else {
+            dispatch(verifyEmailError(result))
+        }
+    },
+    error => {
+        dispatch(verifyEmailError(error))
+    })
+    .catch(err => {
+        console.log(err)
+    });
+}
+
+const signupAuth = (result) => ({
+    type: ActionTypes.AUTH_USER,
+    payload: result
+});
+
 const signupLoading = () => ({
     type: ActionTypes.SIGNUP_LOADING
 });
@@ -64,6 +90,11 @@ const resendEmailSuccess = (result) => ({
     payload: result
 })
 
+const verifyEmailError = (error) => ({
+    type: ActionTypes.VERIFY_EMAIL_ERROR,
+    payload: error
+})
+
 export const signupAction = {
-    signUp, resendEmailVerification
+    signUp, resendEmailVerification, verifyEmailTofetchUser
 };

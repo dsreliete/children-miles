@@ -82,13 +82,11 @@ const Main = (props) => {
                 <Route path='/history' component={HistoryPage} />
                 <Route path='/signup' component={SignupPage} />
                 <Route path='/verifyEmail/:token'  
-                    render={({match}) => (
-                        <VerifyEmail token={match.params.token}/>)
-                    }/>
+                    render={(props) => <VerifyEmail token={props}/>}
+                />
                 <Route path='/resendEmail/:email'   
-                    render={({match}) => (
-                        <ResendEmail email={match.params.email}/>)
-                    }/>
+                    render={({match}) => (<ResendEmail email={match.params.email}/>)}
+                />
             </Switch>
         </div>
     );
