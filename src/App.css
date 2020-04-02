@@ -43,6 +43,10 @@ body {
   background-color: #011910;
 }
 
+.navbar-light { 
+  background-color: #FFC107;
+}
+
 .navbar-nav .nav-item .nav-link:link {
   color: #011910; }
 

@@ -5,7 +5,9 @@ import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 
 import TitleComponent from '../TitleComponent';
-import { Loading } from '../LoadingComponent';
+import Loading  from '../LoadingComponent';
+import Header from '../HeaderComponent';
+
 import { signUp } from '../../redux/_actions';
 
 const mapStateToProps = state => {
@@ -60,6 +62,8 @@ class Signup extends Component {
         const iconLeft = "fa fa-registered fa-1x mr-3"
 
         return(
+            <>
+            <Header />
             <div className="container-component">
                 <div className="row justify-content-center">
                     <div className="col-lg-6">
@@ -248,6 +252,7 @@ class Signup extends Component {
                     </div>
                 </div>
             </div>
+        </>
         );
 
     }

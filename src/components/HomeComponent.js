@@ -1,7 +1,12 @@
 import React from 'react';
+import HeaderLogged from './HeaderLoggedComponent';
 
 const Home = (props) => {
-    return(<div>Home</div>)
+    return(
+    <>
+        <HeaderLogged />
+        <div>Home</div>
+    </>)
 }
 
 export default Home;

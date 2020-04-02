@@ -7,6 +7,7 @@ import { resendEmailVerification } from '../../redux/_actions';
 import TitleComponent from '../TitleComponent';
 import ResendEmailMessageButtonComponent from './ResendEmailMessageButtonComponent';
 import Loading from '../LoadingComponent';
+import Header from '../HeaderComponent';
 
 
 const mapStateToProps = state => {
@@ -43,6 +44,8 @@ class ResendEmail extends Component {
         const iconLeft = "fa fa-registered fa-1x mr-3";
 
         return(
+            <>
+            <Header />
             <div className="container-component">
                 <div className="row justify-content-center">
                     <div className="col-lg-6">
@@ -82,6 +85,7 @@ class ResendEmail extends Component {
                     </div>
                 </div>  
             </div>
+        </>
         );
     }
 }

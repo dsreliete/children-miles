@@ -44,7 +44,7 @@ class HeaderLogged extends Component {
                         </div>
                     </div>
                 </Jumbotron>
-                <Navbar dark sticky="top" expand="md" className="justify-content-center">
+                <Navbar light sticky="top" expand="md" className="justify-content-center">
                     <div className="navbar-container">
                         <NavbarToggler onClick={this.toggleNav} />
                         <Collapse isOpen={this.state.isNavOpen} navbar>

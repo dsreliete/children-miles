@@ -7,6 +7,8 @@ import { verifyEmailTofetchUser, resendEmailVerification } from '../../redux/_ac
 import TitleComponent from '../TitleComponent';
 import ResendEmailMessageButtonComponent from './ResendEmailMessageButtonComponent';
 import Loading from '../LoadingComponent';
+import Header from '../HeaderComponent';
+import HeaderLogged from '../HeaderLoggedComponent';
 
 const mapStateToProps = state => {
     return {
@@ -46,6 +48,8 @@ class VerifyEmail extends Component {
         const title = "Ativação de conta";
         const iconLeft = "fa fa-registered fa-1x mr-3"
         return(
+            <>
+            <Header />
             <div className="container-component">
                 <div className="row justify-content-center">
                     <div className="col-lg-6">
@@ -91,6 +95,7 @@ class VerifyEmail extends Component {
                     </div>    
                 </div>
             </div>
+        </>
         );
     }
 }
