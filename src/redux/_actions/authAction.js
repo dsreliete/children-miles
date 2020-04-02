@@ -101,10 +101,10 @@ export const verifyEmailTofetchUser = (token) => dispatch => {
     });
 }
 
-export const login = (user) => dispatch => {
+export const login = (username, password) => dispatch => {
     dispatch(loading());
 
-    authService.login(user)
+    authService.login(username, password)
     .then(result => {
         if(result.success) {
             dispatch(authenticate)

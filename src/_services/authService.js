@@ -23,7 +23,7 @@ const signupUser = (user) => {
         .then(response => response.json())
         .then(response => {return resolve(response)})
         .catch(error => {
-            const result = { message: "It is not possible to create a new family user. Try later!" };
+            const result = { success: false, message: "It is not possible to create a new family user. Try later!" };
             return reject(result);
         });
     })
@@ -89,12 +89,13 @@ const verifyEmail = (token) => {
     });
 }
 
-const login = (user) => {
+const login = (username, password) => {
 
     const bodyContent = {
-        email: user.email,
-        password: user.password
+        username: username,
+        password: password
     }
+    alert(JSON.stringify(bodyContent))
 
     return new Promise((resolve, reject) => {
         fetch(`${baseUrl}/login`, {
@@ -118,7 +119,7 @@ const login = (user) => {
         .then(response => response.json())
         .then(response => { return resolve(response) })
         .catch(error => {
-            const result = { message: "It is not possible to login. Try again!" };
+            const result = { success: false, message: "It is not possible to login. Try again!" };
             return reject(result);
         });
     });

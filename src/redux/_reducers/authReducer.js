@@ -29,7 +29,7 @@ export default function(state = { }, action) {
         case VERIFY_EMAIL_ERROR:
             return { ...state, verify: false, payload: { verifyEmail: action.payload } };
         case SIGNIN_FAILURE:
-            return { ...state, signin: false, payload: { signinError: action.payload } };
+            return { ...state, signin: false, isLoading: false, payload: { signinError: action.payload } };
         case AUTH_USER:
             return { ...state, authenticated: true, payload: { auth: action.payload } };
         case UNAUTH_USER:
