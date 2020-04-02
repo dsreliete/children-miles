@@ -3,7 +3,7 @@ import * as ActionTypes from '../ActionTypes';
 import { history } from '../../history';
 
 export const signUp = (user) => dispatch => {
-    dispatch(signupLoading());
+    dispatch(loading());
 
     signupService.signupUser(user)
     .then(result => {
@@ -23,7 +23,7 @@ export const signUp = (user) => dispatch => {
 }
 
 export const resendEmailVerification = (email) => dispatch => {
-    dispatch(signupLoading());
+    dispatch(loading());
 
     signupService.resendEmail(email)
     .then(result => {
@@ -40,13 +40,53 @@ export const resendEmailVerification = (email) => dispatch => {
     });
 }
 
+export const requestChangePassword = (email) => dispatch => {
+    dispatch(loading());
+
+    signupService.requestNewPassword(email)
+    .then(result => {
+        if(result.success) {
+            
+        } else {
+            
+        }
+    },
+    error => console.log(error)  
+    )
+    .catch(err => {
+        console.log(err)
+    });
+}
+
+export const changePassword = (email) => dispatch => {
+    dispatch(loading());
+
+    signupService.updatePassword(email)
+    .then(result => {
+        if(result.success) {
+            sendSuccessfullUpdatePasswordMessage()
+        } else {
+            
+        }
+    },
+    error => console.log(error)  
+    )
+    .catch(err => {
+        console.log(err)
+    });
+}
+
+const sendSuccessfullUpdatePasswordMessage = () => {
+
+}
+
 export const verifyEmailTofetchUser = (token) => dispatch => {
-    dispatch(signupLoading());
+    dispatch(loading());
 
     signupService.verifyEmail(token)
     .then(result => {
         if(result.success) {
-            dispatch(signupAuth);
+            dispatch(authenticate);
             localStorage.setItem('user', result.user);
             history.push("/home")
         } else {
@@ -61,14 +101,64 @@ export const verifyEmailTofetchUser = (token) => dispatch => {
     });
 }
 
-const signupAuth = (result) => ({
+export const login = (user) => dispatch => {
+    dispatch(loading());
+
+    signupService.login(user)
+    .then(result => {
+        if(result.success) {
+            dispatch(authenticate)
+            localStorage.setItem('user', result.user);
+            history.push("/home")
+        } else {
+            dispatch(signinError(result))
+        }
+        
+    },
+    error => dispatch(signinError(error))  
+    )
+    .catch(err => {
+        console.log(err)
+    });
+}
+
+export const logout = () => dispatch => {
+    dispatch(loading());
+
+    signupService.logout()
+    .then(result => {
+        dispatch(unauthenticate)
+        localStorage.removeItem('user');
+        history.push("/signin")
+    },
+    error => {
+        dispatch(unauthenticate) 
+        localStorage.removeItem('user');
+        history.push("/signin")
+    })
+    .catch(err => {
+        console.log(err)
+    });
+}
+
+const unauthenticate = (result) => ({
+    type: ActionTypes.UNAUTH_USER,
+    payload: result
+});
+
+const authenticate = (result) => ({
     type: ActionTypes.AUTH_USER,
     payload: result
 });
 
-const signupLoading = () => ({
-    type: ActionTypes.SIGNUP_LOADING
+const loading = () => ({
+    type: ActionTypes.LOADING
 });
+
+const signinError = (error) => ({
+    type: ActionTypes.SIGNIN_FAILURE,
+    payload: error
+})
 
 const signupSuccess = (response) => ({
     type: ActionTypes.SIGNUP_SUCCESS,
@@ -96,5 +186,5 @@ const verifyEmailError = (error) => ({
 })
 
 export const signupAction = {
-    signUp, resendEmailVerification, verifyEmailTofetchUser
+    signUp, resendEmailVerification, verifyEmailTofetchUser, login, logout, requestChangePassword, changePassword
 };

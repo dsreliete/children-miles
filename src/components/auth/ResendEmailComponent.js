@@ -11,7 +11,7 @@ import Loading from '../LoadingComponent';
 
 const mapStateToProps = state => {
     return {
-        signup: state.signup
+        auth: state.auth
     };
 };
 
@@ -56,8 +56,8 @@ class ResendEmail extends Component {
                                 <div className="col-lg-6">
                                 
                                 {
-                                    !this.state.resend && this.props.signup.signup && this.props.signup.payload.signup ?
-                                        <h4 className="payload-message">{this.props.signup.payload.signup.message}</h4> 
+                                    !this.state.resend && this.props.auth.signup && this.props.auth.payload.signup ?
+                                        <h4 className="payload-message">{this.props.auth.payload.signup.message}</h4> 
                                     :
                                     <div></div> 
                                 }
@@ -67,12 +67,12 @@ class ResendEmail extends Component {
                                 />
                                 {
                                     
-                                    this.state.resend && this.props.signup.isLoading ? <Loading/> :
-                                    this.state.resend && this.props.signup.resend ? 
-                                    <h5 className="payload-message my-3">{this.props.signup.payload.resend.message}</h5>
+                                    this.state.resend && this.props.auth.isLoading ? <Loading/> :
+                                    this.state.resend && this.props.auth.resend ? 
+                                    <h5 className="payload-message my-3">{this.props.auth.payload.resend.message}</h5>
                                     :
-                                    this.state.resend && !this.props.signup.resend ?
-                                    <h5 className="payload-message my-3">{this.props.signup.payload.resendError.message}</h5> 
+                                    this.state.resend && !this.props.auth.resend ?
+                                    <h5 className="payload-message my-3">{this.props.auth.payload.resendError.message}</h5> 
                                     :
                                     <div></div>
                                 }    
