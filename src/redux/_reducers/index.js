@@ -1,13 +1,15 @@
 import { combineReducers } from 'redux';
 import { createForms } from 'react-redux-form';
-import { InitialSignupForm} from '../_actions';
-import signupReducer from './signupReducer';
+import { InitialSignupForm, InitialRescuePasswordForm, InitialSigninForm } from '../_actions';
+import authReducer from './authReducer';
 
 
 const rootReducer = combineReducers({
-    signup: signupReducer,
+    auth: authReducer,
     ...createForms({
-        signupForm: InitialSignupForm
+        signupForm: InitialSignupForm,
+        rescuePasswordForm: InitialRescuePasswordForm,
+        signinForm: InitialSigninForm
     })
 });
 

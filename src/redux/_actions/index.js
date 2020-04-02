@@ -1,2 +1,2 @@
-export * from './initialSignupForm';
-export * from './signupAction';
+export * from './initialAuthForm';
+export * from './authAction';

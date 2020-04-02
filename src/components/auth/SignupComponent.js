@@ -10,7 +10,7 @@ import { signUp } from '../../redux/_actions';
 
 const mapStateToProps = state => {
     return {
-        signup: state.signup,
+        auth: state.auth,
     };
 };
 
@@ -231,8 +231,8 @@ class Signup extends Component {
                             <Row >
                                 <Col className="payload-message text-center mt-3">      
                                     {
-                                        this.props.signup.isLoading ? <Loading/> :
-                                        this.props.signup.error ? <h4>{ this.props.signup.payload.signupError.message }</h4> :
+                                        this.props.auth.isLoading ? <Loading/> :
+                                        this.props.auth.error ? <h4>{ this.props.auth.payload.signupError.message }</h4> :
                                         <div></div>
                                     }
                                 </Col>

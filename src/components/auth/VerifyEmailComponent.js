@@ -10,7 +10,7 @@ import Loading from '../LoadingComponent';
 
 const mapStateToProps = state => {
     return {
-        signup: state.signup
+        auth: state.auth
     };
 };
 
@@ -38,7 +38,7 @@ class VerifyEmail extends Component {
         this.setState({
             resend: true,
         });
-        const email = this.props.signup.signup.payload.verifyEmail.user.email;
+        const email = this.props.auth.signup.payload.verifyEmail.user.email;
         this.props.postResendEmailVerification(email)
     }
 
@@ -58,30 +58,30 @@ class VerifyEmail extends Component {
                                 <div className="col-lg-6">
                                 
                                 {
-                                    !this.state.resend && this.props.signup.verify === false && 
-                                    this.props.signup.payload.verifyEmail && this.props.signup.payload.verifyEmail.user ?
+                                    !this.state.resend && this.props.auth.verify === false && 
+                                    this.props.auth.payload.verifyEmail && this.props.auth.payload.verifyEmail.user ?
                                         <div>
-                                            <h4 className="payload-message">{this.props.signup.payload.verifyEmail.message}</h4> 
+                                            <h4 className="payload-message">{this.props.auth.payload.verifyEmail.message}</h4> 
                                             <ResendEmailMessageButtonComponent
                                                 message={'Tente pedir outro envio de email para verificação de conta!'} 
                                                 handleResendEmail={this.handleResendEmail}    
                                             />
                                         </div>
                                     :
-                                    !this.state.resend && this.props.signup.verify === false && 
-                                    this.props.signup.payload.verifyEmail  ?
-                                        <h4 className="payload-message">{this.props.signup.payload.verifyEmail.message}</h4> 
+                                    !this.state.resend && this.props.auth.verify === false && 
+                                    this.props.auth.payload.verifyEmail  ?
+                                        <h4 className="payload-message">{this.props.auth.payload.verifyEmail.message}</h4> 
                                     :
                                         <div></div> 
                                 }
                                 {
                                     
-                                    this.state.resend && this.props.signup.isLoading ? <Loading/> :
-                                    this.state.resend && this.props.signup.resend ? 
-                                        <h5 className="payload-message my-3">{this.props.signup.payload.resend.message}</h5>
+                                    this.state.resend && this.props.auth.isLoading ? <Loading/> :
+                                    this.state.resend && this.props.auth.resend ? 
+                                        <h5 className="payload-message my-3">{this.props.auth.payload.resend.message}</h5>
                                     :
-                                    this.state.resend && !this.props.signup.resend ?
-                                        <h5 className="payload-message my-3">{this.props.signup.payload.resendError.message}</h5> 
+                                    this.state.resend && !this.props.auth.resend ?
+                                        <h5 className="payload-message my-3">{this.props.auth.payload.resendError.message}</h5> 
                                     :
                                     <div></div>
                                 }    
