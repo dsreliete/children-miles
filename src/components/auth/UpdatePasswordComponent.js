@@ -19,7 +19,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = {
     verifyEmailTofetchUser: (token) => verifyEmailTofetchUserAndUpdatePassword(token),
     resetUpdatePasswordForm: () => (actions.reset('updatePasswordForm')),
-    updatePassword: (password) => changePassword(password),
+    updatePassword: (userId, password) => changePassword(userId, password)
 };
 
 class UpdatePassword extends Component {
@@ -28,7 +28,7 @@ class UpdatePassword extends Component {
         this.state = {
             password: '',
             confirmPassword: '',
-            token: this.props.token.split(":")[1],
+            token: this.props.match.params.token,
             requestPassword: false,
             touched: {
                 password: false,
@@ -45,7 +45,7 @@ class UpdatePassword extends Component {
         this.setState({
             requestPassword: true
         })
-        const userId = this.props.auth.payload.sendUpdatePassword.user._id;
+        const userId = this.props.auth.payload.verifyRequestPassword.user._id;
         this.props.updatePassword(userId, value.password);
         this.props.resetUpdatePasswordForm();
     }
@@ -72,8 +72,10 @@ class UpdatePassword extends Component {
                             <Row >
                                 <Col className="payload-message text-center mt-3">      
                                     {
-                                        this.props.auth.sendUpdatePassword === false ? 
-                                            <h4>{ this.props.auth.payload.sendUpdatePasswordError.message }</h4> :
+                                        !this.state.requestPassword && this.props.auth.verifyRequestPassword === false ?
+                                            <h4>{ this.props.auth.payload.verifyRequestPasswordError.message }</h4>
+                                            :
+                                        !this.state.requestPassword && this.props.auth.verifyRequestPassword ?   
                                             <div> 
                                                 <Form 
                                                     model="updatePasswordForm" 
@@ -136,13 +138,15 @@ class UpdatePassword extends Component {
                                                     <Col className="payload-message text-center mt-3">      
                                                         {
                                                             this.state.requestPassword && this.props.auth.isLoading ? <Loading/> :
-                                                            this.state.requestPassword && this.props.auth.resetPassword === false ? <h4>{ this.props.auth.payload.resetError.message }</h4> :
-                                                            this.state.requestPassword && this.props.auth.resetPassword ? <h4>{ this.props.auth.payload.reset.message }</h4> :
-                                                            <div></div>
+                                                            this.state.requestPassword && this.props.auth.resetPassword === false ? 
+                                                                <h4>{ this.props.auth.payload.resetError.message }</h4> 
+                                                            :
+                                                                <div></div>
                                                         }
                                                     </Col>
                                                 </Row>
                                             </div>
+                                        : <div></div> 
                                     }
                                 </Col>
                             </Row>

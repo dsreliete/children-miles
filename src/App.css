@@ -104,6 +104,10 @@ body {
   color: #026440;
 }
 
+.btn-close {
+  background-color: #026440;;
+}
+
 .footer-link {
   color: #C2185B;
 }

@@ -10,7 +10,7 @@ import {
     UNAUTH_USER,
     RESET_PASSWORD,
     RESET_PASSWORD_FAILURE,
-    VERIFY_REQUEST_PASSWORD_SUCCESS,
+    VERIFY_REQUEST_PASSWORD,
     VERIFY_REQUEST_PASSWORD_FAILURE,
     SEND_EMAIL_UPDATE_PASSWORD_ERROR,
     SEND_EMAIL_UPDATE_PASSWORD
@@ -37,14 +37,14 @@ export default function(state = { }, action) {
         case UNAUTH_USER:
             return { ...state, authenticated: false, payload: { unauth: action.payload } };
         case RESET_PASSWORD:
-            return { ...state, resetPassword: true, isLoading: false, payload: { reset: action.payload } };
+            return { ...state, resetPassword: true, isLoading: false, signin: true, payload: { reset: action.payload } };
         case RESET_PASSWORD_FAILURE:
             return { ...state, resetPassword: false, isLoading: false, payload: { resetError: action.payload } };
         case SEND_EMAIL_UPDATE_PASSWORD:
             return {...state, sendUpdatePassword: true, isLoading: false, payload: { sendUpdatePassword: action.payload }}
         case SEND_EMAIL_UPDATE_PASSWORD_ERROR:
             return {...state, sendUpdatePassword: false, isLoading: false, payload: { sendUpdatePasswordError: action.payload }}
-        case VERIFY_REQUEST_PASSWORD_SUCCESS:
+        case VERIFY_REQUEST_PASSWORD:
             return { ...state, verifyRequestPassword: true, isLoading: false, payload: { verifyRequestPassword: action.payload} };
         case VERIFY_REQUEST_PASSWORD_FAILURE:
             return { ...state, verifyRequestPassword: false, isLoading: false, payload: { verifyRequestPasswordError: action.payload } }; 

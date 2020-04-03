@@ -63,7 +63,7 @@ export const verifyEmailTofetchUserAndAuth = (token) => dispatch => {
 
 export const login = (username, password) => dispatch => {
     dispatch(loading());
-
+    
     authService.login(username, password)
     .then(result => {
         if(result.success) {
@@ -124,12 +124,14 @@ export const verifyEmailTofetchUserAndUpdatePassword = (token) => dispatch => {
     authService.verifyEmailAndUpdatePassword(token)
     .then(result => {
         if(result.success) {
+            
             dispatch(verifyRequestPasswordSuccess(result))
         } else {
-            dispatch(verifyRequestPasswordlError(result))
+            dispatch(verifyRequestPasswordError(result))
+            alert(JSON.stringify(result))
         }
     },
-    error => dispatch(verifyRequestPasswordlError(error)))
+    error => dispatch(verifyRequestPasswordError(error)))
     .catch(err => {
         console.log(err)
     });
@@ -137,11 +139,12 @@ export const verifyEmailTofetchUserAndUpdatePassword = (token) => dispatch => {
 
 export const changePassword = (userId, password) => dispatch => {
     dispatch(loading());
-
+    
     authService.updatePassword(userId, password)
     .then(result => {
         if(result.success) {
             dispatch(resetPassword(result))
+            history.push("/signin")
         } else {
             dispatch(resetPasswordError(result))
         }
@@ -206,13 +209,13 @@ const sendRequestUpdatePasswordSuccess = (result) => ({
     payload: result
 })
 
-const verifyRequestPasswordlError = (error) => ({
+const verifyRequestPasswordError = (error) => ({
     type: ActionTypes.VERIFY_REQUEST_PASSWORD_FAILURE,
     payload: error
 })
 
 const verifyRequestPasswordSuccess = (result) => ({
-    type: ActionTypes.VERIFY_REQUEST_PASSWORD_SUCCESS,
+    type: ActionTypes.VERIFY_REQUEST_PASSWORD,
     payload: result
 })
 

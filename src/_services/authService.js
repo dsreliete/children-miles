@@ -95,7 +95,6 @@ const login = (username, password) => {
         username: username,
         password: password
     }
-    alert(JSON.stringify(bodyContent))
 
     return new Promise((resolve, reject) => {
         fetch(`${baseUrl}/login`, {
@@ -180,7 +179,7 @@ const verifyEmailAndUpdatePassword = (token) => {
         .then(response => response.json())
         .then(response => { return resolve(response) })
         .catch(error => {
-            const result = { message: "It is not possible to activate your account. Try to request another email verification!" };
+            const result = { message: "It is not possible to reset password. Try to request another password!" };
             return reject(result);
         });
     });
@@ -188,10 +187,14 @@ const verifyEmailAndUpdatePassword = (token) => {
 
 const updatePassword = (userId, password) => {
 
+    const bodyContent = {
+        password,
+        userId
+    }
     return new Promise((resolve, reject) => {
-        fetch(`${baseUrl}/updateCredentials/${userId}`, {
+        fetch(`${baseUrl}/updateCredentials`, {
             method: "POST",
-            body: JSON.stringify(password),
+            body: JSON.stringify(bodyContent),
             headers: {
                 "Content-Type": "application/json",
                 "Origin": baseUrl

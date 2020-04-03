@@ -37,6 +37,10 @@ class RescuePassword extends Component {
         this.props.resetRescuePasswordForm();
     }
 
+    closeBrowser() {
+        window.open('', '_parent', '').close();
+    }
+
     render() {
         const required = val => val && val.length;
         const validEmail = val => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(val);
@@ -92,7 +96,12 @@ class RescuePassword extends Component {
                                     {
                                         this.props.auth.isLoading ? <Loading/> :
                                         this.props.auth.sendUpdatePassword === false ? <h4>{ this.props.auth.payload.sendUpdatePasswordError.message }</h4> :
-                                        this.props.auth.sendUpdatePassword ? <h4>{ this.props.auth.payload.sendUpdatePassword.message }</h4> :
+                                        this.props.auth.sendUpdatePassword ? 
+                                        <div>
+                                            <h4>{ this.props.auth.payload.sendUpdatePassword.message }</h4>
+                                            <Button className="btn-close btn-lg mt-3" onClick={() => this.closeBrowser}> Fechar este navegador </Button>
+                                        </div>
+                                        :
                                         <div></div>
                                     }
                                 </Col>

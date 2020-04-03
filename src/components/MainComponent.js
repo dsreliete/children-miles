@@ -37,7 +37,7 @@ const Main = (props) => {
                 <Route path='/signin' render={() => <Signin/>} />
                 <Route path='/rescueCredentials' render={() => <RescuePassword />} />
                 <Route path='/resetCredentials/:token' 
-                    render={({match}) => (<UpdatePassword token={match.params.token} />)} 
+                    render={(props) => <UpdatePassword token={props} />} 
                 />
 
                 <Redirect to='/signin' />
