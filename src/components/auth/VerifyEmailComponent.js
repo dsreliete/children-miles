@@ -2,13 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter} from 'react-router-dom';
 
-import { verifyEmailTofetchUser, resendEmailVerification } from '../../redux/_actions';
+import { verifyEmailTofetchUserAndAuth, resendEmailVerification } from '../../redux/_actions';
 
 import TitleComponent from '../TitleComponent';
 import ResendEmailMessageButtonComponent from './ResendEmailMessageButtonComponent';
 import Loading from '../LoadingComponent';
 import Header from '../HeaderComponent';
-import HeaderLogged from '../HeaderLoggedComponent';
 
 const mapStateToProps = state => {
     return {
@@ -17,7 +16,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
-    verifyEmailTofetchUser: (token) => (verifyEmailTofetchUser(token)),
+    verifyEmailTofetchUser: (token) => (verifyEmailTofetchUserAndAuth(token)),
     postResendEmailVerification: (email) => (resendEmailVerification(email))
 };
 

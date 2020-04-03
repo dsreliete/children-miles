@@ -1,9 +1,11 @@
 export const InitialSignupForm = {
     username: '',
     password: '',
+    confirmPassword:'',
     firstname: '',
     lastname: '',
-    email: ''
+    email: '',
+    confirmEmail: ''
 };
 
 export const InitialSigninForm = {
@@ -12,5 +14,9 @@ export const InitialSigninForm = {
 };
 
 export const InitialRescuePasswordForm = {
+    email: ''
+};
+
+export const InitialUpdatePasswordForm = {
     email: ''
 };
