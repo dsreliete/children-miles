@@ -62,9 +62,9 @@ const resendEmail = (email) => {
     });
 }
 
-const verifyEmail = (token) => {
+const verifyEmailAndAuth = (token) => {
     return new Promise((resolve, reject) => {
-        fetch(`${baseUrl}/verifyEmail/${token}`, {
+        fetch(`${baseUrl}/verifyEmailAndAuth/${token}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -125,11 +125,16 @@ const login = (username, password) => {
     });
 }
 
-const updatePassword = (email) => {
+const requestNewPassword = (email) => {
+
+    const bodyContent = {
+        email
+    }
+    
     return new Promise((resolve, reject) => {
-        fetch(`${baseUrl}/recoverPassword`, {
+        fetch(`${baseUrl}/requestCredentials`, {
             method: "POST",
-            body: JSON.stringify(email),
+            body: JSON.stringify(bodyContent),
             headers: {
                 "Content-Type": "application/json",
                 "Origin": baseUrl
@@ -148,17 +153,45 @@ const updatePassword = (email) => {
         .then(response => response.json())
         .then(response => { return resolve(response) })
         .catch(error => {
-            const result = { message: "It is not possible to login. Try again!" };
+            const result = { message: "It is not possible to send a reset password link by email. Try again!" };
             return reject(result);
         });
     });
 }
 
-const requestNewPassword = (email) => {
+const verifyEmailAndUpdatePassword = (token) => {
     return new Promise((resolve, reject) => {
-        fetch(`${baseUrl}/resetCredentials/${email}`, {
+        fetch(`${baseUrl}/resetCredentials/${token}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            }
+        })
+        .then(response => {
+            if (response.ok) {
+                return response;
+            } else if (response.status !== 200 ) {
+                const error = new Error(`Error ${response.status}: ${response.statusText}`);
+                error.response = response;
+                throw error;
+            }   
+        },
+        error => { throw error; })
+        .then(response => response.json())
+        .then(response => { return resolve(response) })
+        .catch(error => {
+            const result = { message: "It is not possible to activate your account. Try to request another email verification!" };
+            return reject(result);
+        });
+    });
+}
+
+const updatePassword = (userId, password) => {
+
+    return new Promise((resolve, reject) => {
+        fetch(`${baseUrl}/updateCredentials/${userId}`, {
             method: "POST",
-            body: JSON.stringify(email),
+            body: JSON.stringify(password),
             headers: {
                 "Content-Type": "application/json",
                 "Origin": baseUrl
@@ -184,6 +217,12 @@ const requestNewPassword = (email) => {
 }
 
 export const authService = {
-    signupUser, resendEmail, verifyEmail, login, requestNewPassword, updatePassword
+    signupUser, 
+    resendEmail, 
+    verifyEmailAndAuth, 
+    login, 
+    requestNewPassword, 
+    verifyEmailAndUpdatePassword, 
+    updatePassword
 };
 

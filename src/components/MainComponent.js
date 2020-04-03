@@ -2,7 +2,6 @@ import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom'
 
 import Signup from './auth/SignupComponent';
-import Header from './HeaderComponent.js';
 import Home from './HomeComponent.js';
 import Family from './family/FamilyComponent.js';
 import Child from './children/ChildrenComponent.js';
@@ -14,59 +13,20 @@ import VerifyEmail from './auth/VerifyEmailComponent';
 import ResendEmail from './auth/ResendEmailComponent';
 import Signin from './auth/SigninComponent';
 import RescuePassword from './auth/RescuePasswordComponent';
+import UpdatePassword from './auth/UpdatePasswordComponent';
 
 const Main = (props) => {
-
-    const FamilyPage = () => {
-        return (
-            <Family />
-        )
-    }
-
-    const ChildPage = () => {
-        return (
-            <Child />
-        )
-    }
-
-    const AwardPage = () => {
-        return (
-            <Award />
-        )
-    }
-
-    const GoalPage = () => {
-        return (
-            <Goal />
-        )
-
-    }
-
-    const PenaltyPage = () => {
-        return (
-            <Penalty />
-        )
-    }
-
-    const HistoryPage = () => {
-        return (
-            <History />
-        )
-    }
-
-    
-
 
     return (
         <div>
             <Switch>
                 <Route path='/home' render={() => <Home/>} />
-                <Route path='/family' component={FamilyPage} />
-                <Route path='/child' component={ChildPage} />
-                <Route path='/awards' component={AwardPage} />
-                <Route path='/goals' component={GoalPage} />
-                <Route path='/penalties' component={PenaltyPage} />
-                <Route path='/history' component={HistoryPage} />
+                <Route path='/family' render={() => <Family/>} />
+                <Route path='/child' render={() => <Child/>} />
+                <Route path='/awards' render={() => <Award/>} />
+                <Route path='/goals' render={() => <Goal/>} />
+                <Route path='/penalties' render={() => <Penalty/>} />
+                <Route path='/history' render={() => <History/>}/>
                 <Route path='/signup' render={() => <Signup/>} />
                 <Route path='/verifyEmail/:token'  
                     render={(props) => <VerifyEmail token={props}/>}
@@ -75,8 +35,12 @@ const Main = (props) => {
                     render={({match}) => (<ResendEmail email={match.params.email}/>)}
                 />
                 <Route path='/signin' render={() => <Signin/>} />
-                <Route path='/rescueCredentials' render={() => <RescuePassword/>} />
-                <Redirect to='/home' />
+                <Route path='/rescueCredentials' render={() => <RescuePassword />} />
+                <Route path='/resetCredentials/:token' 
+                    render={({match}) => (<UpdatePassword token={match.params.token} />)} 
+                />
+
+                <Redirect to='/signin' />
             </Switch>
         </div>
     );

@@ -40,50 +40,10 @@ export const resendEmailVerification = (email) => dispatch => {
     });
 }
 
-export const requestChangePassword = (email) => dispatch => {
+export const verifyEmailTofetchUserAndAuth = (token) => dispatch => {
     dispatch(loading());
 
-    authService.requestNewPassword(email)
-    .then(result => {
-        if(result.success) {
-            
-        } else {
-            
-        }
-    },
-    error => console.log(error)  
-    )
-    .catch(err => {
-        console.log(err)
-    });
-}
-
-export const changePassword = (email) => dispatch => {
-    dispatch(loading());
-
-    authService.updatePassword(email)
-    .then(result => {
-        if(result.success) {
-            sendSuccessfullUpdatePasswordMessage()
-        } else {
-            
-        }
-    },
-    error => console.log(error)  
-    )
-    .catch(err => {
-        console.log(err)
-    });
-}
-
-const sendSuccessfullUpdatePasswordMessage = () => {
-
-}
-
-export const verifyEmailTofetchUser = (token) => dispatch => {
-    dispatch(loading());
-
-    authService.verifyEmail(token)
+    authService.verifyEmailAndAuth(token)
     .then(result => {
         if(result.success) {
             dispatch(authenticate);
@@ -141,6 +101,57 @@ export const logout = () => dispatch => {
     });
 }
 
+export const requestPassword = (email) => dispatch => {
+    dispatch(loading());
+
+    authService.requestNewPassword(email)
+    .then(result => {
+        if(result.success) {
+            dispatch(sendRequestUpdatePasswordSuccess(result))
+        } else {
+            dispatch(sendRequestUpdatePasswordError(result))
+        }
+    },
+    error => sendRequestUpdatePasswordError(error))
+    .catch(err => {
+        console.log(err)
+    });
+}
+
+export const verifyEmailTofetchUserAndUpdatePassword = (token) => dispatch => {
+    dispatch(loading());
+
+    authService.verifyEmailAndUpdatePassword(token)
+    .then(result => {
+        if(result.success) {
+            dispatch(verifyRequestPasswordSuccess(result))
+        } else {
+            dispatch(verifyRequestPasswordlError(result))
+        }
+    },
+    error => dispatch(verifyRequestPasswordlError(error)))
+    .catch(err => {
+        console.log(err)
+    });
+}
+
+export const changePassword = (userId, password) => dispatch => {
+    dispatch(loading());
+
+    authService.updatePassword(userId, password)
+    .then(result => {
+        if(result.success) {
+            dispatch(resetPassword(result))
+        } else {
+            dispatch(resetPasswordError(result))
+        }
+    },
+    error => resetPasswordError(error))
+    .catch(err => {
+        console.log(err)
+    });
+}
+
 const unauthenticate = (result) => ({
     type: ActionTypes.UNAUTH_USER,
     payload: result
@@ -185,6 +196,43 @@ const verifyEmailError = (error) => ({
     payload: error
 })
 
+const sendRequestUpdatePasswordError = (error) => ({
+    type: ActionTypes.SEND_EMAIL_UPDATE_PASSWORD_ERROR,
+    payload: error
+})
+
+const sendRequestUpdatePasswordSuccess = (result) => ({
+    type: ActionTypes.SEND_EMAIL_UPDATE_PASSWORD,
+    payload: result
+})
+
+const verifyRequestPasswordlError = (error) => ({
+    type: ActionTypes.VERIFY_REQUEST_PASSWORD_FAILURE,
+    payload: error
+})
+
+const verifyRequestPasswordSuccess = (result) => ({
+    type: ActionTypes.VERIFY_REQUEST_PASSWORD_SUCCESS,
+    payload: result
+})
+
+const resetPassword = result => ({
+    type: ActionTypes.RESET_PASSWORD,
+    payload: result
+})
+
+const resetPasswordError = error => ({
+    type: ActionTypes.RESET_PASSWORD_FAILURE,
+    payload: error
+})
+
 export const signupAction = {
-    signUp, resendEmailVerification, verifyEmailTofetchUser, login, logout, requestChangePassword, changePassword
+    signUp, 
+    resendEmailVerification, 
+    verifyEmailTofetchUserAndAuth, 
+    login, 
+    logout, 
+    requestPassword, 
+    verifyEmailTofetchUserAndUpdatePassword, 
+    changePassword
 };
