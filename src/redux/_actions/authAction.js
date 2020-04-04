@@ -47,8 +47,7 @@ export const verifyEmailTofetchUserAndAuth = (token) => dispatch => {
     .then(result => {
         if(result.success) {
             dispatch(authenticate);
-            localStorage.setItem('user', result.user);
-            history.push("/home")
+            history.push("/signin")
         } else {
             dispatch(verifyEmailError(result))
         }
