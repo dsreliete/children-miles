@@ -1,12 +1,15 @@
 import React from 'react';
 import TitleComponent from '../TitleComponent';
 import FamilyForm from './FamilyForm';
+import HeaderLogged from '../HeaderLoggedComponent';
 
 const Family = (props) => {
 
     const title = "Family";
     const iconLeft = "fa fa-users fa-1x mr-3";
     return (
+        <>
+        <HeaderLogged />
         <div className="container-component">
             <div className="row justify-content-center">
                 <div className="col-lg-6">
@@ -19,6 +22,7 @@ const Family = (props) => {
                 </div> 
             </div>
         </div>
+        </>
     );
 
 }

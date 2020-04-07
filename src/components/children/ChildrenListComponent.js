@@ -1,6 +1,7 @@
 import React from 'react';
 import ChildrenItem from './ChildrenItem';
 import TitleComponent from '../TitleComponent';
+import HeaderLogged from '../HeaderLoggedComponent';
 
 export default function ChildrenList(props) {
 
@@ -9,6 +10,7 @@ export default function ChildrenList(props) {
     const iconLeft = "fa fa-user fa-1x mr-3";
     return(
         <>
+            <HeaderLogged />
             <div className="row justify-content-center">
                 <div className="col-lg-6">
                     <TitleComponent 

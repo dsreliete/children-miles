@@ -1,7 +1,13 @@
 import React from 'react';
+import HeaderLogged from '../HeaderLoggedComponent';
 
 const Award = (props) => {
-    return(<div>Award</div>)
+    return(
+    <>
+        <HeaderLogged />
+        <div>Award</div>
+    </>
+    )
 }
 
 export default Award;
