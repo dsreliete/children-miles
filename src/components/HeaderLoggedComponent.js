@@ -84,6 +84,11 @@ class HeaderLogged extends Component {
                                         <i className="fa fa-info fa-lg i-menu" /> Histórico de Atividades
                                     </NavLink>
                                 </NavItem>
+                                <NavItem>
+                                    <NavLink className="nav-link" to="/new-users">
+                                        <i className="fa fa-info fa-lg i-menu" /> Novos usuários
+                                    </NavLink>
+                                </NavItem>
                             </Nav>
                         </Collapse>
                     </div>

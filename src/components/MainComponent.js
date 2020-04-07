@@ -8,6 +8,7 @@ import Goal from './goals/GoalComponent.js';
 import Penalty from './penalties/PenaltyComponent.js';
 import Award from './awards/AwardComponent.js';
 import History from './HistoryComponent.js';
+import NewUsers from './auth/NewUsersComponent';
 
 import Signup from './auth/SignupComponent';
 import VerifyEmail from './auth/VerifyEmailComponent';
@@ -41,6 +42,7 @@ const Main = (props) => {
                 <PrivateRoute path='/goals' component={Goal} />
                 <PrivateRoute path='/penalties' component={Penalty} />
                 <PrivateRoute path='/history' component={History} />
+                <PrivateRoute path='/new-users' component={NewUsers} />
 
                 <Route path='/signup' component={Signup} />
                 <Route path='/signin' component={Signin} />
