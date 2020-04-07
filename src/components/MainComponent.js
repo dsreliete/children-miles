@@ -15,9 +15,7 @@ import ResendEmail from './auth/ResendEmailComponent';
 import Signin from './auth/SigninComponent';
 import RescuePassword from './auth/RescuePasswordComponent';
 import UpdatePassword from './auth/UpdatePasswordComponent';
-
-// import requireAuth from './hoc/RequireAuth';
-// import requireNotAuth from './hoc/RequireNotAuth';
+import PrivateRoute from './PrivateRoute';
 
 const Main = (props) => {
 
@@ -36,13 +34,13 @@ const Main = (props) => {
     return (
         <div>
             <Switch>
-                <Route path='/home' component={Home} />
-                <Route path='/family' component={Family} />
-                <Route path='/child' component={Child} />
-                <Route path='/awards' component={Award} />
-                <Route path='/goals' component={Goal} />
-                <Route path='/penalties' component={Penalty} />
-                <Route path='/history' component={History} />
+                <PrivateRoute path='/home' component={Home} />
+                <PrivateRoute path='/family' component={Family} />
+                <PrivateRoute path='/child' component={Child} />
+                <PrivateRoute path='/awards' component={Award} />
+                <PrivateRoute path='/goals' component={Goal} />
+                <PrivateRoute path='/penalties' component={Penalty} />
+                <PrivateRoute path='/history' component={History} />
 
                 <Route path='/signup' component={Signup} />
                 <Route path='/signin' component={Signin} />
