@@ -22,10 +22,16 @@ const mapDispatchToProps = {
 
 };
 
+const passwordsMatch = (password, confirmPassword) => password === confirmPassword;
+const emailMatch = (email, confirmEmail) => email === confirmEmail;
+
 class Signup extends Component {
     constructor (props){
         super(props);
         this.state = {
+            submitted: false,
+            emailMatch: false,
+            passwordMatch: false,
             username: '',
             password: '',
             confirmPassword: '',
@@ -45,9 +51,42 @@ class Signup extends Component {
         }
     }
 
+    checkEmailMatch(email, confirmEmail) {
+        const checkEmailMatch = emailMatch(email, confirmEmail)
+        if(checkEmailMatch){
+            this.setState({
+                emailMatch: true
+            })
+        }
+        return checkEmailMatch;
+    }
+
+    checkPasswordMatch(password, confirmPassword) {
+        const checkPasswordMatch = passwordsMatch(password, confirmPassword);
+        if(checkPasswordMatch){
+            this.setState({
+                passwordMatch: true
+            })
+        }
+        return checkPasswordMatch;
+    }
+
     handleSubmit(values) {
-        this.props.postSignup(values);
-        this.props.resetSignupForm();
+        
+        this.setState({
+            submitted: true,
+        })
+        
+        if(this.checkEmailMatch(values.email, values.confirmEmail) && 
+            this.checkPasswordMatch(values.password, values.confirmPassword)) {
+            this.props.postSignup(values);
+            this.props.resetSignupForm();
+            this.setState({
+                submitted: false,
+                passwordMatch: false,
+                emailMatch: false
+            })
+        }
     }
 
     render() {
@@ -56,8 +95,6 @@ class Signup extends Component {
         const minLength = len => val => val && (val.length >= len);
         const validEmail = val => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(val);
         const validPassword = val => /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,12}$/i.test(val);
-        const passwordsMatch = (password, confirmPassword) => password === confirmPassword;
-        const emailMatch = (email, confirmEmail) => email === confirmEmail;
         const title = 'Registre-se';
         const iconLeft = "fa fa-registered fa-1x mr-3"
 
@@ -75,11 +112,6 @@ class Signup extends Component {
                             <Form 
                                 model="signupForm" 
                                 validators={{
-                                    '': {
-                                    // Form-level validator
-                                        passwordsMatch: (vals) => passwordsMatch(vals.password, vals.confirmPassword),
-                                        emailMatch: (vals) => emailMatch(vals.email, vals.confirmEmail)
-                                    },
                                     // Field-level validators
                                     password: { required, validPassword },
                                     confirmPassword: { required },
@@ -231,6 +263,24 @@ class Signup extends Component {
                                     </Col>
                                 </Row>
                             </Form>
+
+                            
+                            <Row className="error-message text-center">
+                                <Col>
+                                    {
+                                        this.state.submitted && !this.state.emailMatch 
+                                            && <p className="text-danger">Os emails submetidos devem ser iguais!</p>
+                                    }
+                                </Col>
+                            </Row>
+                            <Row className="error-message text-center">
+                                <Col>
+                                    {
+                                        this.state.submitted && !this.state.passwordMatch &&
+                                            <p className="text-danger">As senhas submetidas devem ser iguais!</p>
+                                    }
+                                </Col>
+                            </Row>
                             
                             <Row >
                                 <Col className="payload-message text-center mt-3">      
