@@ -22,6 +22,8 @@ const mapDispatchToProps = {
     updatePassword: (userId, password) => changePassword(userId, password)
 };
 
+const passwordsMatch = (password, confirmPassword) => password === confirmPassword;
+
 class UpdatePassword extends Component {
     constructor (props){
         super(props);
@@ -30,6 +32,7 @@ class UpdatePassword extends Component {
             confirmPassword: '',
             token: this.props.match.params.token,
             requestPassword: false,
+            passwordMatch: false,
             touched: {
                 password: false,
                 confirmPassword: false,
@@ -41,19 +44,30 @@ class UpdatePassword extends Component {
         this.props.verifyEmailTofetchUser(this.state.token)
     }
 
+    checkPasswordMatch(password, confirmPassword) {
+        return passwordsMatch(password, confirmPassword);
+    }
+
     handleSubmit(value) {
         this.setState({
             requestPassword: true
         })
         const userId = this.props.auth.payload.verifyRequestPassword.user._id;
-        this.props.updatePassword(userId, value.password);
-        this.props.resetUpdatePasswordForm();
+        
+        if(this.checkPasswordMatch(value.password, value.confirmPassword)) {
+            this.props.updatePassword(userId, value.password);
+            this.props.resetUpdatePasswordForm();
+            
+            this.setState({
+                requestPassword: false,
+                passwordMatch: false
+            })
+        } 
     }
 
     render() {
         const required = val => val && val.length;
         const validPassword = val => /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,12}$/i.test(val);
-        const passwordsMatch = (password, confirmPassword) => password === confirmPassword;
 
         const title = 'Update Password';
         const iconLeft = "fa fa-registered fa-1x mr-3"
@@ -75,79 +89,83 @@ class UpdatePassword extends Component {
                                         !this.state.requestPassword && this.props.auth.verifyRequestPassword === false ?
                                             <h4>{ this.props.auth.payload.verifyRequestPasswordError.message }</h4>
                                             :
-                                        !this.state.requestPassword && this.props.auth.verifyRequestPassword ?   
-                                            <div> 
-                                                <Form 
-                                                    model="updatePasswordForm" 
-                                                    validators={{
-                                                        '': {
-                                                        // Form-level validator
-                                                            passwordsMatch: (vals) => passwordsMatch(vals.password, vals.confirmPassword),
-                                                        },
-                                                        // Field-level validators
-                                                        password: { required, validPassword },
-                                                        confirmPassword: { required },
-                                                    }}
-                                                    onSubmit={values => this.handleSubmit(values)}>
-                                                    
-                                                    <Row className="form-group">
-                                                        <Col >
-                                                        <Control type="password" model=".password" id="password" name="password"
-                                                                placeholder="Password"
-                                                                className="form-control"
-                                                            />
-                                                            <Errors
-                                                                className="text-danger"
-                                                                model=".password"
-                                                                show="touched"
-                                                                component="div"
-                                                                messages={{
-                                                                    required: 'Required',
-                                                                    validPassword: 'Must be more than 8 and less than 12 characters and includes lower and capital letter and a numeric digit'
-                                                                }}
-                                                            />
-                                                        </Col>
-                                                    </Row>
-
-                                                    <Row className="form-group">
-                                                        <Col >
-                                                            <Control type="password" model=".confirmPassword" id="confirmPassword" name="confirmPassword"
-                                                                placeholder="Confirm Password"
-                                                                className="form-control"
-                                                            />
-                                                            <Errors
-                                                                className="text-danger"
-                                                                model=".confirmPassword"
-                                                                show="touched"
-                                                                component="div"
-                                                                messages={{
-                                                                    required: 'Required',
-                                                                }}
-                                                            />
-                                                        </Col>
-                                                    </Row>
-                                                    
-                                                    <Row className="form-group text-center">
-                                                        <Col >
-                                                            <Button className="btn-warning btn-lg mt-3" type="submit"> Change Password </Button>
-                                                        </Col>
-                                                    </Row>
-                                                </Form>
-                                                
-                                                <Row >
-                                                    <Col className="payload-message text-center mt-3">      
-                                                        {
-                                                            this.state.requestPassword && this.props.auth.isLoading ? <Loading/> :
-                                                            this.state.requestPassword && this.props.auth.resetPassword === false ? 
-                                                                <h4>{ this.props.auth.payload.resetError.message }</h4> 
-                                                            :
-                                                                <div></div>
-                                                        }
-                                                    </Col>
-                                                </Row>
-                                            </div>
-                                        : <div></div> 
+                                            <div></div>
                                     }
+                                    <div> 
+                                        <Form 
+                                            model="updatePasswordForm" 
+                                            validators={{
+                                                // Field-level validators
+                                                password: { required, validPassword },
+                                                confirmPassword: { required },
+                                            }}
+                                            onSubmit={values => this.handleSubmit(values)}>
+                                            
+                                            <Row className="form-group">
+                                                <Col >
+                                                <Control type="password" model=".password" id="password" name="password"
+                                                        placeholder="Password"
+                                                        className="form-control"
+                                                    />
+                                                    <Errors
+                                                        className="text-danger"
+                                                        model=".password"
+                                                        show="touched"
+                                                        component="div"
+                                                        messages={{
+                                                            required: 'Required',
+                                                            validPassword: 'Must be more than 8 and less than 12 characters and includes lower and capital letter and a numeric digit'
+                                                        }}
+                                                    />
+                                                </Col>
+                                            </Row>
+
+                                            <Row className="form-group">
+                                                <Col >
+                                                    <Control type="password" model=".confirmPassword" id="confirmPassword" name="confirmPassword"
+                                                        placeholder="Confirm Password"
+                                                        className="form-control"
+                                                    />
+                                                    <Errors
+                                                        className="text-danger"
+                                                        model=".confirmPassword"
+                                                        show="touched"
+                                                        component="div"
+                                                        messages={{
+                                                            required: 'Required',
+                                                        }}
+                                                    />
+                                                </Col>
+                                            </Row>
+                                            
+                                            <Row className="form-group text-center">
+                                                <Col >
+                                                    <Button className="btn-warning btn-lg mt-3" type="submit"> Change Password </Button>
+                                                </Col>
+                                            </Row>
+                                        </Form>
+
+                                        <Row className="error-message text-center">
+                                            <Col>
+                                                {
+                                                    this.state.requestPassword && !this.state.passwordMatch &&
+                                                        <p className="text-danger">As senhas submetidas devem ser iguais!</p>
+                                                }
+                                            </Col>
+                                        </Row>
+                                        
+                                        <Row >
+                                            <Col className="payload-message text-center mt-3">      
+                                                {
+                                                    this.state.requestPassword && this.props.auth.isLoading ? <Loading/> :
+                                                    this.state.requestPassword && this.props.auth.resetPassword === false ? 
+                                                        <h4>{ this.props.auth.payload.resetError.message }</h4> 
+                                                    :
+                                                        <div></div>
+                                                }
+                                            </Col>
+                                        </Row>
+                                    </div>
                                 </Col>
                             </Row>
                         </div>
@@ -156,7 +174,6 @@ class UpdatePassword extends Component {
             </div>
         </>
         );
-
     }
 }
 
