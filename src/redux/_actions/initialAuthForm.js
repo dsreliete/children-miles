@@ -21,3 +21,14 @@ export const InitialUpdatePasswordForm = {
     password: '',
     confirmPassword: ''
 };
+
+export const InitialNewUserForm = {
+    username: '',
+    password: '',
+    confirmPassword:'',
+    firstname: '',
+    lastname: '',
+    email: '',
+    confirmEmail: '',
+    role: ''
+}

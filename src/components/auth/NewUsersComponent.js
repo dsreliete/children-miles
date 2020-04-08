@@ -4,7 +4,7 @@ import { withRouter} from 'react-router-dom';
 import { Button, Col, Row } from 'reactstrap';
 import { Control, Form, Errors, actions } from 'react-redux-form';
 
-import {  } from '../../redux/_actions';
+import { createNewUserRole } from '../../redux/_actions';
 
 import TitleComponent from '../TitleComponent';
 import Loading from '../LoadingComponent';
@@ -17,8 +17,8 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
-    resetSignupForm: () => (actions.reset('signupForm'))
-
+    resetNewUserForm: () => (actions.reset('newUserForm')),
+    createNewUserRole: (user) => createNewUserRole(user)
 };
 
 const passwordsMatch = (password, confirmPassword) => password === confirmPassword;
@@ -37,6 +37,7 @@ class NewUsers extends Component {
             firstname: '',
             lastname: '',
             email:'',
+            role: '',
             confirmEmail: '',
             touched: {
                 username: false,
@@ -46,6 +47,7 @@ class NewUsers extends Component {
                 lastname: false,
                 email: false,
                 confirmEmail: false,
+                role: false
             }
         }
     }
@@ -78,8 +80,8 @@ class NewUsers extends Component {
         
         if(this.checkEmailMatch(values.email, values.confirmEmail) && 
             this.checkPasswordMatch(values.password, values.confirmPassword)) {
-            this.props.postSignup(values);
-            this.props.resetSignupForm();
+            this.props.createNewUserRole(values);
+            this.props.resetNewUserForm();
             this.setState({
                 submitted: false,
                 passwordMatch: false,
@@ -109,7 +111,7 @@ class NewUsers extends Component {
                         />
                         <div className="card rounded p-5">
                             <Form 
-                                model="signupForm" 
+                                model="newUserForm" 
                                 validators={{
                                     // Field-level validators
                                     password: { required, validPassword },
@@ -118,7 +120,8 @@ class NewUsers extends Component {
                                     confirmEmail: { required },
                                     lastname: { required, minLength: minLength(2), maxLength: maxLength(25) },
                                     firstname: { required, minLength: minLength(2), maxLength: maxLength(25) },
-                                    username: { required, minLength: minLength(2), maxLength: maxLength(25) }
+                                    username: { required, minLength: minLength(2), maxLength: maxLength(25) },
+                                    role: { required }
                                 }}
                                 onSubmit={values => this.handleSubmit(values)}>
                                 <Row className="form-group">
@@ -251,6 +254,26 @@ class NewUsers extends Component {
                                             messages={{
                                                 required: 'Required',
                                                 emailMatch: 'Deve ser igual senha anterior!'
+                                            }}
+                                        />
+                                    </Col>
+                                </Row>
+
+                                <Row>
+                                    <Col >
+                                        <Control.select model=".role" name="role"
+                                            className="form-control">
+                                            <option>Selecione...</option>
+                                            <option>Gerente</option>
+                                            <option>Usuário</option>
+                                        </Control.select>
+                                        <Errors
+                                            className="text-danger"
+                                            model=".role"
+                                            show="touched"
+                                            component="div"
+                                            messages={{
+                                                required: 'Required'
                                             }}
                                         />
                                     </Col>

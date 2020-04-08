@@ -67,7 +67,9 @@ export const login = (username, password) => dispatch => {
     .then(result => {
         if(result.success) {
             dispatch(authenticate)
-            localStorage.setItem('user', result.user);
+            localStorage.setItem('userId', result.user._id);
+            localStorage.setItem('family', result.user.family);
+            localStorage.setItem('token', result.token);
             history.push("/home")
         } else {
             dispatch(signinError(result))
