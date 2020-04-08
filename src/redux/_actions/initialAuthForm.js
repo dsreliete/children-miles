@@ -18,5 +18,6 @@ export const InitialRescuePasswordForm = {
 };
 
 export const InitialUpdatePasswordForm = {
-    email: ''
+    password: '',
+    confirmPassword: ''
 };
