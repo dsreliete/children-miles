@@ -45,7 +45,13 @@ class UpdatePassword extends Component {
     }
 
     checkPasswordMatch(password, confirmPassword) {
-        return passwordsMatch(password, confirmPassword);
+        const checkPasswordMatch = passwordsMatch(password, confirmPassword);
+        if(checkPasswordMatch){
+            this.setState({
+                passwordMatch: true
+            })
+        }
+        return checkPasswordMatch;
     }
 
     handleSubmit(value) {
