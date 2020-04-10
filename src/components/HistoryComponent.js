@@ -1,7 +1,14 @@
 import React from 'react';
+import HeaderLogged from '../HeaderLoggedComponent';
 
 const History = (props) => {
-    return(<div>History</div>)
+    
+    return(
+    <>
+        <HeaderLogged />
+        <div>History</div>
+    </>
+    );
 }
 
 export default History;
