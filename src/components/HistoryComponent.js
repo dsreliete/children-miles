@@ -1,5 +1,5 @@
 import React from 'react';
-import HeaderLogged from '../HeaderLoggedComponent';
+import HeaderLogged from './HeaderLoggedComponent';
 
 const History = (props) => {
     
