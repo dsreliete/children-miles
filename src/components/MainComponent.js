@@ -46,10 +46,10 @@ const Main = (props) => {
 
                 <Route path='/signup' component={Signup} />
                 <Route path='/signin' component={Signin} />
-                <Route path='/rescueCredentials' component={RescuePassword} />
-                <Route path='/verifyEmail/:token' component={VerifyEmailAndAuthUser} />
-                <Route path='/resendEmail/:email' component={ResendEmailToAuthUser} />
-                <Route path='/resetCredentials/:token' component={VerifyEmailAndUpdatePassword} />
+                <Route path='/rescue-credentials' component={RescuePassword} />
+                <Route path='/verify-email/:token' component={VerifyEmailAndAuthUser} />
+                <Route path='/resend-email/:email' component={ResendEmailToAuthUser} />
+                <Route path='/reset-credentials/:token' component={VerifyEmailAndUpdatePassword} />
                 
                 <Redirect to='/signin' />
             </Switch>
