@@ -1,8 +1,8 @@
 import {baseUrl} from './baseUrl';
 
 // return authorization header with jwt token
-let token = JSON.parse(localStorage.getItem('token'));
-let familyId = JSON.parse(localStorage.getItem('familyId'))
+let token = localStorage.getItem('token');
+let familyId = localStorage.getItem('familyId');
 
 const registerNewUserRole = (user) => {
     return new Promise((resolve, reject) => {
