@@ -1,8 +1,8 @@
 import { newUserService } from '../../_services';
-import * as ActionTypes from '../ActionTypes';
+// import * as ActionTypes from '../ActionTypes';
 
 export const createNewUserRole = (user) => dispatch => {
-    dispatch(loading());
+    // dispatch(loading());
     
     newUserService.registerNewUserRole(user)
     .then(result => {
@@ -18,9 +18,9 @@ export const createNewUserRole = (user) => dispatch => {
     });
 }
 
-const loading = () => ({
-    type: ActionTypes.LOADING
-});
+// const loading = () => ({
+//     type: ActionTypes.LOADING
+// });
 
 export const newUserAction = {
     createNewUserRole

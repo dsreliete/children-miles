@@ -12,7 +12,7 @@ import Header from '../HeaderComponent';
 
 const mapStateToProps = state => {
     return {
-        auth: state.auth
+        resetPassword: state.resetPassword
     };
 };
 
@@ -90,11 +90,11 @@ class RescuePassword extends Component {
                             <Row >
                                 <Col className="payload-message text-center mt-3">      
                                     {
-                                        this.props.auth.isLoading ? <Loading/> :
-                                        this.props.auth.sendUpdatePassword === false ? 
-                                            <h4>{ this.props.auth.payload.sendUpdatePasswordError.message }</h4> :
-                                        this.props.auth.sendUpdatePassword ? 
-                                            <h4>{ this.props.auth.payload.sendUpdatePassword.message }</h4>
+                                        this.props.resetPassword.isLoading ? <Loading/> :
+                                        this.props.resetPassword.sendUpdatePassword === false ? 
+                                            <h4>{ this.props.resetPassword.payload.sendUpdatePasswordError.message }</h4> :
+                                        this.props.resetPassword.sendUpdatePassword ? 
+                                            <h4>{ this.props.resetPassword.payload.sendUpdatePassword.message }</h4>
                                         :
                                             <div></div>
                                     }

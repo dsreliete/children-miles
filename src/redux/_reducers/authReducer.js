@@ -1,19 +1,13 @@
 import {
     SIGNUP_SUCCESS,
     SIGNUP_FAILURE,
-    LOADING,
+    AUTH_LOADING,
     RESEND_EMAIL,
     RESEND_EMAIL_FAILURE,
     VERIFY_EMAIL_ERROR,
     SIGNIN_FAILURE,
     AUTH_USER,
-    UNAUTH_USER,
-    RESET_PASSWORD,
-    RESET_PASSWORD_FAILURE,
-    VERIFY_REQUEST_PASSWORD,
-    VERIFY_REQUEST_PASSWORD_FAILURE,
-    SEND_EMAIL_UPDATE_PASSWORD_ERROR,
-    SEND_EMAIL_UPDATE_PASSWORD
+    UNAUTH_USER
 } from '../ActionTypes';
 
 export default function(state = { }, action) {
@@ -22,7 +16,7 @@ export default function(state = { }, action) {
             return { ...state, signup: true, isLoading: false, error: false, payload: { signup: action.payload } };
         case SIGNUP_FAILURE:
             return { ...state, signup: false, isLoading: false, error: true, payload : { signupError: action.payload } };
-        case LOADING:
+        case AUTH_LOADING:
             return { ...state, signup: false, isLoading: true, error: false };
         case RESEND_EMAIL:
             return { ...state, signup: false, isLoading: false, error: false, resend: true, payload: { resend: action.payload } };
@@ -35,19 +29,7 @@ export default function(state = { }, action) {
         case AUTH_USER:
             return { ...state, authenticated: true, payload: { auth: action.payload } };
         case UNAUTH_USER:
-            return { ...state, authenticated: false, payload: { unauth: action.payload } };
-        case RESET_PASSWORD:
-            return { ...state, resetPassword: true, isLoading: false, signin: true, payload: { reset: action.payload } };
-        case RESET_PASSWORD_FAILURE:
-            return { ...state, resetPassword: false, isLoading: false, payload: { resetError: action.payload } };
-        case SEND_EMAIL_UPDATE_PASSWORD:
-            return {...state, sendUpdatePassword: true, isLoading: false, payload: { sendUpdatePassword: action.payload }}
-        case SEND_EMAIL_UPDATE_PASSWORD_ERROR:
-            return {...state, sendUpdatePassword: false, isLoading: false, payload: { sendUpdatePasswordError: action.payload }}
-        case VERIFY_REQUEST_PASSWORD:
-            return { ...state, verifyRequestPassword: true, isLoading: false, payload: { verifyRequestPassword: action.payload} };
-        case VERIFY_REQUEST_PASSWORD_FAILURE:
-            return { ...state, verifyRequestPassword: false, isLoading: false, payload: { verifyRequestPasswordError: action.payload } }; 
+            return { ...state, authenticated: false, payload: { unauth: action.payload } }; 
         default:
             return state;
     }

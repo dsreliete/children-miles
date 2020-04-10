@@ -12,7 +12,7 @@ import Header from '../HeaderComponent';
 
 const mapStateToProps = state => {
     return {
-        auth: state.auth
+        resetPassword: state.resetPassword
     };
 };
 
@@ -58,7 +58,7 @@ class UpdatePassword extends Component {
         this.setState({
             requestPassword: true
         })
-        const userId = this.props.auth.payload.verifyRequestPassword.user._id;
+        const userId = this.props.resetPassword.payload.verifyRequestPassword.user._id;
         
         if(this.checkPasswordMatch(value.password, value.confirmPassword)) {
             this.props.updatePassword(userId, value.password);
@@ -92,8 +92,8 @@ class UpdatePassword extends Component {
                             <Row >
                                 <Col className="payload-message text-center mt-3">      
                                     {
-                                        !this.state.requestPassword && this.props.auth.verifyRequestPassword === false ?
-                                            <h4>{ this.props.auth.payload.verifyRequestPasswordError.message }</h4>
+                                        !this.state.requestPassword && this.props.resetPassword.verifyRequestPassword === false ?
+                                            <h4>{ this.props.resetPassword.payload.verifyRequestPasswordError.message }</h4>
                                             :
                                             <div></div>
                                     }
@@ -163,9 +163,9 @@ class UpdatePassword extends Component {
                                         <Row >
                                             <Col className="payload-message text-center mt-3">      
                                                 {
-                                                    this.state.requestPassword && this.props.auth.isLoading ? <Loading/> :
-                                                    this.state.requestPassword && this.props.auth.resetPassword === false ? 
-                                                        <h4>{ this.props.auth.payload.resetError.message }</h4> 
+                                                    this.state.requestPassword && this.props.resetPassword.isLoading ? <Loading/> :
+                                                    this.state.requestPassword && this.props.resetPassword.resetPassword === false ? 
+                                                        <h4>{ this.props.resetPassword.payload.resetError.message }</h4> 
                                                     :
                                                         <div></div>
                                                 }
