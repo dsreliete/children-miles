@@ -115,9 +115,12 @@ class Signin extends Component {
                             <Row >
                                 <Col className="payload-message text-center mt-3">      
                                     {
-                                        this.props.auth.isLoading ? <Loading/> :
-                                        this.props.auth.signin === false ? <h4>{ this.props.auth.payload.signinError.message }</h4> :
-                                        <div></div>
+                                        this.props.auth.isLoading ? <Loading/> : <div></div>
+                                        
+                                    }
+                                    {
+                                        this.props.auth.signin === false ? 
+                                        <h4>{ this.props.auth.payload.signinError.message }</h4> : <div></div>
                                     }
                                 </Col>
                             </Row>
@@ -125,7 +128,7 @@ class Signin extends Component {
                             <Row >
                                 <Col className="text-center mt-3">
                                     <h4 className="footer-link-label">Esqueceu a senha?</h4>
-                                    <Link to="/rescueCredentials" className="footer-link"><h5>Clique aqui para recuperá-la!</h5></Link>
+                                    <Link to="/rescue-credentials" className="footer-link"><h5>Clique aqui para recuperá-la!</h5></Link>
                                 </Col>
                             </Row>
                         </div>
