@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter} from 'react-router-dom';
 
-import { resendEmailVerification } from '../../redux/_actions';
+import { resendEmailVerification, cancelComponents} from '../../redux/_actions';
 
 import TitleComponent from '../TitleComponent';
 import ResendEmailMessageButtonComponent from './ResendEmailMessageButtonComponent';
@@ -17,7 +17,8 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
-    postResendEmailVerification: (email) => (resendEmailVerification(email))
+    postResendEmailVerification: (email) => (resendEmailVerification(email)),
+    cancelComponents: () => cancelComponents()
 };
 
 
@@ -29,6 +30,10 @@ class ResendEmail extends Component {
             resend: false,
             email: this.props.email.split(":")[1]
         }
+    }
+
+    componentWillUnmount(){
+        this.props.cancelComponents()
     }
 
     handleResendEmail = () => {
