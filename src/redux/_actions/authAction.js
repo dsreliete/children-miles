@@ -9,7 +9,7 @@ export const signUp = (user) => dispatch => {
     .then(result => {
             if(result.success){
                 dispatch(signupSuccess(result))
-                history.push(`/resendEmail/:${user.email}`)
+                history.push(`/resend-email/:${user.email}`)
             } else {
                 dispatch(signupError(result))
             }
