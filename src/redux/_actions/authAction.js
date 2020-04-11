@@ -9,7 +9,6 @@ export const signUp = (user) => dispatch => {
     .then(result => {
             if(result.success){
                 dispatch(signupSuccess(result))
-                //redirecionar para link com msg de sucesso envio de email para verificacao e botao resend verification email
                 history.push(`/resendEmail/:${user.email}`)
             } else {
                 dispatch(signupError(result))
@@ -48,6 +47,8 @@ export const verifyEmailTofetchUserAndAuth = (token) => dispatch => {
         if(result.success) {
             dispatch(authenticate);
             history.push("/signin")
+        } else if(!result.success && result.user){
+            dispatch(verifyEmailErrorAnotherTry(result))
         } else {
             dispatch(verifyEmailError(result))
         }
@@ -66,11 +67,11 @@ export const login = (username, password) => dispatch => {
     authService.login(username, password)
     .then(result => {
         if(result.success) {
-            dispatch(authenticate)
             localStorage.setItem('userId', result.user._id);
             localStorage.setItem('family', result.user.family);
             localStorage.setItem('token', result.token);
             history.push("/home")
+            dispatch(authenticate)
         } else {
             dispatch(signinError(result))
         }
@@ -101,6 +102,14 @@ export const logout = () => dispatch => {
         console.log(err)
     });
 }
+
+export const cancelComponents = () => dispatch => {
+    dispatch(cancel())
+}
+
+const cancel = () => ({
+    type: ActionTypes.AUTH_LOADING_CANCEL
+})
 
 const unauthenticate = (result) => ({
     type: ActionTypes.UNAUTH_USER,
@@ -141,8 +150,13 @@ const resendEmailSuccess = (result) => ({
     payload: result
 })
 
-const verifyEmailError = (error) => ({
+const verifyEmailError = (error) => ({  
     type: ActionTypes.VERIFY_EMAIL_ERROR,
+    payload: error
+})
+
+const verifyEmailErrorAnotherTry = (error) => ({
+    type: ActionTypes.VERIFY_EMAIL_ERROR_ASK_AGAIN,
     payload: error
 })
 
@@ -151,5 +165,6 @@ export const signupAction = {
     resendEmailVerification, 
     verifyEmailTofetchUserAndAuth, 
     login, 
-    logout
+    logout,
+    cancelComponents
 };

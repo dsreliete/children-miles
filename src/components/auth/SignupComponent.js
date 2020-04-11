@@ -8,7 +8,7 @@ import TitleComponent from '../TitleComponent';
 import Loading  from '../LoadingComponent';
 import Header from '../HeaderComponent';
 
-import { signUp } from '../../redux/_actions';
+import { signUp, cancelComponents } from '../../redux/_actions';
 
 const mapStateToProps = state => {
     return {
@@ -18,7 +18,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
     resetSignupForm: () => (actions.reset('signupForm')),
-    postSignup: (user) => (signUp(user))
+    postSignup: (user) => (signUp(user)),
+    cancelComponents: () => cancelComponents()
 
 };
 
@@ -49,6 +50,10 @@ class Signup extends Component {
                 confirmEmail: false,
             }
         }
+    }
+
+    componentWillUnmount(){
+        this.props.cancelComponents()
     }
 
     checkEmailMatch(email, confirmEmail) {

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter} from 'react-router-dom';
 
-import { verifyEmailTofetchUserAndAuth, resendEmailVerification } from '../../redux/_actions';
+import { verifyEmailTofetchUserAndAuth, resendEmailVerification, cancelComponents } from '../../redux/_actions';
 
 import TitleComponent from '../TitleComponent';
 import ResendEmailMessageButtonComponent from './ResendEmailMessageButtonComponent';
@@ -17,7 +17,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
     verifyEmailTofetchUser: (token) => (verifyEmailTofetchUserAndAuth(token)),
-    postResendEmailVerification: (email) => (resendEmailVerification(email))
+    postResendEmailVerification: (email) => (resendEmailVerification(email)),
+    cancelComponents: () => cancelComponents()
 };
 
 
@@ -35,11 +36,15 @@ class VerifyEmail extends Component {
         this.props.verifyEmailTofetchUser(this.state.token)
     }
 
+    componentWillUnmount(){
+        this.props.cancelComponents()
+    }
+
     handleResendEmail = () => {
         this.setState({
             resend: true,
         });
-        const email = this.props.auth.signup.payload.verifyEmail.user.email;
+        const email = this.props.auth.payload.verifyError.user.email;
         this.props.postResendEmailVerification(email)
     }
 
@@ -61,19 +66,19 @@ class VerifyEmail extends Component {
                                 <div className="col-lg-6">
                                 
                                 {
-                                    !this.state.resend && this.props.auth.verify === false && 
-                                    this.props.auth.payload.verifyEmail && this.props.auth.payload.verifyEmail.user ?
+                                    !this.state.resend && this.props.auth.error && this.props.resend &&
+                                    this.props.auth.payload.verifyError && this.props.auth.payload.verifyError.user ?
                                         <div>
-                                            <h4 className="payload-message">{this.props.auth.payload.verifyEmail.message}</h4> 
+                                            <h4 className="payload-message">{this.props.auth.payload.verifyError.message}</h4> 
                                             <ResendEmailMessageButtonComponent
                                                 message={'Tente pedir outro envio de email para verificação de conta!'} 
                                                 handleResendEmail={this.handleResendEmail}    
                                             />
                                         </div>
                                     :
-                                    !this.state.resend && this.props.auth.verify === false && 
-                                    this.props.auth.payload.verifyEmail  ?
-                                        <h4 className="payload-message">{this.props.auth.payload.verifyEmail.message}</h4> 
+                                    !this.state.resend && this.props.auth.error && !this.props.resend && !this.props.verify &&
+                                    this.props.auth.payload.verifyError  ?
+                                        <h4 className="payload-message">{this.props.auth.payload.verifyError.message}</h4> 
                                     :
                                         <div></div> 
                                 }

@@ -4,7 +4,7 @@ import { withRouter, Link} from 'react-router-dom';
 import { Button, Col, Row } from 'reactstrap';
 import { Control, Form, Errors, actions } from 'react-redux-form';
 
-import { login } from '../../redux/_actions';
+import { login, cancelComponents } from '../../redux/_actions';
 
 import TitleComponent from '../TitleComponent';
 import Loading from '../LoadingComponent';
@@ -18,7 +18,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
     resetSigninForm: () => (actions.reset('signinForm')),
-    postLogin: (username, password) => login(username, password)
+    postLogin: (username, password) => login(username, password),
+    cancelComponents: () => cancelComponents()
 };
 
 class Signin extends Component {
@@ -37,6 +38,10 @@ class Signin extends Component {
     handleSubmit(values) {
         this.props.postLogin(values.username, values.password);
         this.props.resetSigninForm();
+    }
+
+    componentWillUnmount(){
+        this.props.cancelComponents()
     }
 
     render() {
@@ -119,7 +124,7 @@ class Signin extends Component {
                                         
                                     }
                                     {
-                                        this.props.auth.signin === false ? 
+                                        this.props.auth.error ? 
                                         <h4>{ this.props.auth.payload.signinError.message }</h4> : <div></div>
                                     }
                                 </Col>
