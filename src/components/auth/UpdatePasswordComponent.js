@@ -4,7 +4,7 @@ import { withRouter} from 'react-router-dom';
 import { Button, Col, Row } from 'reactstrap';
 import { Control, Form, Errors, actions } from 'react-redux-form';
 
-import { changePassword, verifyEmailTofetchUserAndUpdatePassword } from '../../redux/_actions';
+import { changePassword, verifyEmailTofetchUserAndUpdatePassword, cancelComponents } from '../../redux/_actions';
 
 import TitleComponent from '../TitleComponent';
 import Loading from '../LoadingComponent';
@@ -12,14 +12,15 @@ import Header from '../HeaderComponent';
 
 const mapStateToProps = state => {
     return {
-        resetPassword: state.resetPassword
+        password: state.password
     };
 };
 
 const mapDispatchToProps = {
     verifyEmailTofetchUser: (token) => verifyEmailTofetchUserAndUpdatePassword(token),
     resetUpdatePasswordForm: () => (actions.reset('updatePasswordForm')),
-    updatePassword: (userId, password) => changePassword(userId, password)
+    updatePassword: (userId, password) => changePassword(userId, password),
+    cancelComponents: () => cancelComponents()
 };
 
 const passwordsMatch = (password, confirmPassword) => password === confirmPassword;
@@ -44,6 +45,10 @@ class UpdatePassword extends Component {
         this.props.verifyEmailTofetchUser(this.state.token)
     }
 
+    componentWillUnmount(){
+        this.props.cancelComponents()
+    }
+
     checkPasswordMatch(password, confirmPassword) {
         const checkPasswordMatch = passwordsMatch(password, confirmPassword);
         if(checkPasswordMatch){
@@ -58,7 +63,7 @@ class UpdatePassword extends Component {
         this.setState({
             requestPassword: true
         })
-        const userId = this.props.resetPassword.payload.verifyRequestPassword.user._id;
+        const userId = this.props.password.payload.verifyRequestPassword.user._id;
         
         if(this.checkPasswordMatch(value.password, value.confirmPassword)) {
             this.props.updatePassword(userId, value.password);
@@ -92,8 +97,8 @@ class UpdatePassword extends Component {
                             <Row >
                                 <Col className="payload-message text-center mt-3">      
                                     {
-                                        !this.state.requestPassword && this.props.resetPassword.verifyRequestPassword === false ?
-                                            <h4>{ this.props.resetPassword.payload.verifyRequestPasswordError.message }</h4>
+                                        !this.state.requestPassword && this.props.password.verifyRequestPassword === false ?
+                                            <h4>{ this.props.password.payload.verifyRequestPasswordError.message }</h4>
                                             :
                                             <div></div>
                                     }
@@ -163,9 +168,9 @@ class UpdatePassword extends Component {
                                         <Row >
                                             <Col className="payload-message text-center mt-3">      
                                                 {
-                                                    this.state.requestPassword && this.props.resetPassword.isLoading ? <Loading/> :
-                                                    this.state.requestPassword && this.props.resetPassword.resetPassword === false ? 
-                                                        <h4>{ this.props.resetPassword.payload.resetError.message }</h4> 
+                                                    this.state.requestPassword && this.props.password.isLoading ? <Loading/> :
+                                                    this.state.requestPassword && this.props.password.resetPassword === false ? 
+                                                        <h4>{ this.props.password.payload.resetError.message }</h4> 
                                                     :
                                                         <div></div>
                                                 }
