@@ -4,7 +4,7 @@ import { withRouter} from 'react-router-dom';
 import { Button, Col, Row } from 'reactstrap';
 import { Control, Form, Errors, actions } from 'react-redux-form';
 
-import { requestPassword } from '../../redux/_actions';
+import { requestPassword, cancelComponents } from '../../redux/_actions';
 
 import TitleComponent from '../TitleComponent';
 import Loading from '../LoadingComponent';
@@ -12,19 +12,21 @@ import Header from '../HeaderComponent';
 
 const mapStateToProps = state => {
     return {
-        resetPassword: state.resetPassword
+        password: state.password
     };
 };
 
 const mapDispatchToProps = {
     resetRescuePasswordForm: () => (actions.reset('rescuePasswordForm')),
     requestPassword: (email) => requestPassword(email),
+    cancelComponents: () => cancelComponents()
 };
 
 class RescuePassword extends Component {
     constructor (props){
         super(props);
         this.state = {
+            requestChange: false,
             email: '',
             touched: {
                 email: false
@@ -32,7 +34,14 @@ class RescuePassword extends Component {
         }
     }
 
+    componentWillUnmount(){
+        this.props.cancelComponents()
+    }
+
     handleSubmit(value) {
+        this.setState({
+            requestChange: true
+        })
         this.props.requestPassword(value.email);
         this.props.resetRescuePasswordForm();
     }
@@ -90,13 +99,16 @@ class RescuePassword extends Component {
                             <Row >
                                 <Col className="payload-message text-center mt-3">      
                                     {
-                                        this.props.resetPassword.isLoading ? <Loading/> :
-                                        this.props.resetPassword.sendUpdatePassword === false ? 
-                                            <h4>{ this.props.resetPassword.payload.sendUpdatePasswordError.message }</h4> :
-                                        this.props.resetPassword.sendUpdatePassword ? 
-                                            <h4>{ this.props.resetPassword.payload.sendUpdatePassword.message }</h4>
+                                        this.state.requestChange && this.props.password.isLoading ? <Loading/> : <div></div>
+                                    }
+                                    {
+                                        this.state.requestChange && this.props.password.sendUpdatePassword === false ? 
+                                            <h4>{ this.props.password.payload.sendUpdateError.message }</h4> 
                                         :
-                                            <div></div>
+                                            this.state.requestChange && this.props.password.sendUpdatePassword ? 
+                                                <h4>{ this.props.password.payload.sendUpdatePassword.message }</h4>
+                                                :
+                                                <div></div>
                                     }
                                 </Col>
                             </Row>

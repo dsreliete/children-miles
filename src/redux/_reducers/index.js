@@ -3,12 +3,12 @@ import { createForms } from 'react-redux-form';
 import { InitialSignupForm, InitialRescuePasswordForm, 
     InitialSigninForm, InitialUpdatePasswordForm, InitialNewUserForm } from '../_actions';
 import authReducer from './authReducer';
-import resetPasswordReducer from './resetPasswordReducer';
+import { Password }  from './passwordReducer';
 
 
 const rootReducer = combineReducers({
     auth: authReducer,
-    resetPassword: resetPasswordReducer,
+    password: Password,
     ...createForms({
         signupForm: InitialSignupForm,
         rescuePasswordForm: InitialRescuePasswordForm,

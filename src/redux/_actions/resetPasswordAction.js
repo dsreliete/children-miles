@@ -29,7 +29,6 @@ export const verifyEmailTofetchUserAndUpdatePassword = (token) => dispatch => {
             dispatch(verifyRequestPasswordSuccess(result))
         } else {
             dispatch(verifyRequestPasswordError(result))
-            alert(JSON.stringify(result))
         }
     },
     error => dispatch(verifyRequestPasswordError(error)))
@@ -55,6 +54,14 @@ export const changePassword = (userId, password) => dispatch => {
         console.log(err)
     });
 }
+
+export const cancelComponents = () => dispatch => {
+    dispatch(cancel())
+}
+
+const cancel = () => ({
+    type: ActionTypes.AUTH_LOADING_CANCEL
+})
 
 const loading = () => ({
     type: ActionTypes.RESET_PASSWORD_LOADING
@@ -93,5 +100,6 @@ const resetPasswordError = error => ({
 export const signupAction = {
     requestPassword, 
     verifyEmailTofetchUserAndUpdatePassword, 
-    changePassword
+    changePassword,
+    cancelComponents
 };
